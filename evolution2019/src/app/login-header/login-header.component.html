@@ -1,0 +1,42 @@
+<div *ngIf = "showHeader" class="row border-bottom border-info">
+	<div class = "col-xl-7 col-lg-7 col-md-5 col-sm-6  col-xs-5">
+		<img class="apd-logo mgnleft20" src={{cusLogo}} /> <!--blinkbtmtotop blinktoptobtm-->
+		<label class="apd-logo-text text-info mgnleft5 capitalize">{{cusName}}</label>
+		<i class ="fa fa-angle-double-up font_12 pointer mgnleft20 " title="Click to hide header" (click)="hideHeader()"></i>
+	</div>
+	<div *ngIf = "showProfile" class = "col-xl-1 col-lg-1 col-md-2 col-sm-3 col-xs-3 apdpad0 mgntop10">
+		<div ngbDropdown class="d-inline-block" >
+            <button class="btn btn-outline-info"  id="dropdownBasic1" ngbDropdownToggle>{{entSelVal}}</button>
+            <ul ngbDropdownMenu aria-labelledby="dropdownBasic1" style="max-height:200px; overflow:auto;">
+                <i *ngFor = "let entItem of entCollection"  class="dropdown-item font_12" (click)="onEntChange(entItem)">{{entItem.e_name}}</i>
+            </ul>
+        </div>
+	</div>
+	<div *ngIf = "showProfile" class = "col-xl-4 col-lg-4 col-md-5 col-sm-3 col-xs-3  mgntop10" style="display:inherit;">
+		<div id="gt992" class="col-xl-8 col-lg-8 col-sm-8 col-md-8 col-xs-8 apd-right">
+			<label class="mgntop5 ">Welcome {{userName}}</label>
+		</div>
+		<div class="col-xl-2 col-lg-2 col-sm-6 col-md-6 col-xs-6 apd-right" >
+			<i class="fa fa-street-view clrgreen font_24 mgnleft5" title="{{userName}}"></i>
+		</div>
+		<div class="col-xl-2 col-lg-2 col-sm-6 col-md-6 col-xs-6 apd-right" >
+			<div ngbDropdown class="d-inline-block">
+				<i class="fa fa-ellipsis-v clrgray font_24 apd-right pointer" id="menudropdown" ngbDropdownToggle style::after="content: none"></i>
+				<ul class="font_12" ngbDropdownMenu aria-labelledby="menudropdown" style="margin-left:-230px">
+					<li [routerLink]="['/profile']" class="dropdown-item"><a >Profile Settings</a></li>
+					<li class="dropdown-item"><a href="#">Change Password</a></li>
+					<li role="separator" class="divider"></li>
+					<li class="dropdown-item"><a href="#"><i class="fa fa-cloud-download-alt font_12 clrgreen mgnright5"></i>Download Filebeat Tool (Linux)</a></li>
+					<li class="dropdown-item"><a href="#"><i class="fa fa-cloud-download-alt font_12 clr1b639e mgnright5"></i>Download Windows Agent</a></li>
+					<li class="dropdown-item"><a href="#"><i class="fa fa-cloud-download-alt font_12 clr7e7e7e mgnright5"></i>Download AVL Monitor Agent</a></li>
+					<li class="dropdown-item"><a href="#"><i class="fa fa-cloud-upload-alt font_12 clrwheat mgnright5"></i>Upload JMeter Scripts </a></li>				
+					<li role="separator" class="divider"></li>
+					<li class="dropdown-item"><a class="pointer" (click)="logout()">Sign Out<i class="fa fa-sign-out-alt mgnleft10 font_12 clrred"></i></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>        
+<div *ngIf="!showHeader" class="pointer" style="float:left;margin-left:10px;" >
+	<i class="fa fa-angle-double-down font_12 mgnleft20" title="Click to display header" (click)="hideHeader()"></i>
+</div>

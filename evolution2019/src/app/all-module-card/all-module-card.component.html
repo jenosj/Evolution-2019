@@ -1,0 +1,311 @@
+<app-login-header></app-login-header>
+<!--Display the card header -->
+<div class="row" style="margin: auto;" >
+  <div  class="row col-xl-4 col-lg-4 col-sm-6 col-md-4 col-xs-12 mgnauto apd-right mgnleft15 "  >
+    <div class=" row col-lg-2 col-sm-2 col-md-2 col-xs-2 apdpad0">
+      <span *ngIf = "showBackBtn"><i class="fas fa-angle-double-left clrwheat pointer mgntop7" (click)="onBackFromCard()" title="Back"></i></span>
+      <span class="mgnleft10" title="Dashboard">
+          <a [routerLink]="['/dashboard']">
+            <span class="fa-stack fa-1x mgntop2 apdpad2 pointer">
+              <i class="fa fa-circle fa-stack-2x  clrgreen"></i>
+              <i class="fas fa-chart-area fa-stack-1x clrdarkgrey" ></i>
+            </span>
+          </a>
+      </span>
+    </div>
+    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2 mgnauto  apdpad0 " title="Server Monitor" >
+      <div ngbDropdown class="d-inline-block">
+        <span class="fa-stack fa-1x mgntop2 apdpad2 pointer" id="menudropdown" ngbDropdownToggle> 
+            <i class="fa fa-circle fa-stack-2x  clr1b639e"></i> 
+            <i class="fas fa-server fa-stack-1x clrwhite"></i>
+        </span>
+        <ul ngbDropdownMenu aria-labelledby="menudropdown" style="margin-left:20px">
+            <li class="dropdown-item font_12" (click)="getMMStat('server','Operating System')"><i class="fas fa-hockey-puck font_12 clrgreen mgnright5"></i>Operating System</li>
+            <li class="dropdown-item font_12" (click)="getMMStat('application','Application')"><i class="fas fa-file-code font_12 clryellow mgnright5"></i>Application</li>
+            <li class="dropdown-item font_12" (click)="getMMStat('database','Database')"><i class="fas fa-database font_12 clrinfo mgnright5"></i>Database</li>
+            <li role="separator" class="divider"></li>
+            <li class="dropdown-item font_12" (click)="getMMStat('profiler','Java Profiler')"><i class="fas fa-code font_12 clrdanger mgnright5"></i>Java Profiler</li>
+            <li class="dropdown-item font_12" (click)="getMMStat('netstack','.Net Profiler')"><i class="fas fa-code font_12 clrdanger mgnright5"></i>.Net Profiler</li>
+            <li role="separator" class="divider"></li>
+            <li class="dropdown-item font_12" (click)="getMMStat('log','Log Monitoring')"><i class="fas fa-indent font_12 clrwarning mgnright5"></i>Log Monitoring</li>
+        </ul>
+      </div>    
+    </div>
+    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2 mgnauto  apdpad0 " title="External Monitors" >
+      <div ngbDropdown class="d-inline-block">
+        <span class="fa-stack fa-1x mgntop2 apdpad2 pointer" id="menudropdown" ngbDropdownToggle> 
+            <i class="fa fa-circle fa-stack-2x  clrred"></i> 
+            <i class="fas fa-globe fa-stack-1x clrwhite"></i>
+        </span>
+        <ul ngbDropdownMenu aria-labelledby="menudropdown" style="margin-left:20px">
+            <li class="dropdown-item font_12" (click)="getMMStat('rum','Real User')"><i class="fas fa-users font_12 clrgreen mgnright5"></i>Real User</li>
+            <li class="dropdown-item font_12"><i class="fab fa-android font_12 clrsecondary mgnright5"></i>Synthetic User</li>
+            <li class="dropdown-item font_12"><i class="fas fa-unlink font_12 clrinfo mgnright5"></i>Availability</li>
+        </ul>
+      </div>    
+    </div>
+    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2 mgnauto  apdpad0 " title="Alerts" >
+      <div ngbDropdown class="d-inline-block">
+        <span class="fa-stack fa-1x mgntop2 apdpad2 pointer" id="menudropdown" ngbDropdownToggle> 
+            <i class="fa fa-circle fa-stack-2x clrwarning"></i> 
+            <i class="far fa-bell fa-stack-1x clrblack"></i>
+        </span>
+        <ul ngbDropdownMenu aria-labelledby="menudropdown" style="margin-left:20px">
+            <li class="dropdown-item font_12"><i class="far fa-bell font_12 clrgreen mgnright5"></i>User Alerts</li>
+            <li class="dropdown-item font_12"><i class="far fa-bell font_12 clrsecondary mgnright5"></i>System Alerts</li>
+            <li class="dropdown-item font_12"><i class="far fa-bell font_12 clrinfo mgnright5"></i>SUM Alerts</li>
+            <li class="dropdown-item font_12"><i class="far fa-bell font_12 clrinfo mgnright5"></i>RUM Alerts</li>
+        </ul>
+      </div>    
+    </div>
+    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2 mgnauto pointer apdpad0 " title="Custom Charts" >
+        <div ngbDropdown class="d-inline-block">
+          <span class="fa-stack fa-1x mgntop2 apdpad2 pointer" id="menudropdown" ngbDropdownToggle> 
+              <i class="fa fa-circle fa-stack-2x clrinfo"></i> 
+              <i class="fas fa-code-branch fa-stack-1x clrblack fa-rotate-90"></i>
+          </span>
+          <ul ngbDropdownMenu aria-labelledby="menudropdown" style="margin-left:20px">
+              <li class="dropdown-item font_12" (click)="getDbConnectors()"><i class="fas fa-database font_12 clrgreen mgnright5" ></i>DB Connectors</li>
+              <li class="dropdown-item font_12"><i class="fas fa-code-branch font_12 fa-rotate-90 clrSecondary mgnright5"></i>Service Map</li>
+              <li class="dropdown-item font_12" (click)="getChartVisualStat()"><i class="fas fa-chart-area font_12 clrinfo mgnright5"></i>Chart Visualizer</li>
+          </ul>
+        </div>    
+     </div>
+    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2 mgnauto  apdpad0 " title="Cloud Load Testing" >
+      <div ngbDropdown class="d-inline-block">
+        <span class="fa-stack fa-1x mgntop2 apdpad2 pointer" id="menudropdown" ngbDropdownToggle> 
+            <i class="fa fa-circle fa-stack-2x  clrred"></i> 
+            <i class="fas fa-paw fa-stack-1x clrwheat fa-rotate-90" ></i>
+        </span>
+        <ul ngbDropdownMenu aria-labelledby="menudropdown" style="margin-left:20px">
+            <li class="dropdown-item font_12"><i class="fas fa-paw font_12 clrgreen mgnright5 fa-rotate-90" ></i>LT Scripts</li>
+            <li class="dropdown-item font_12"><i class="fas fa-paw font_12 clrSecondary mgnright5 fa-rotate-90" ></i>LT Scenarios</li>
+            <li class="dropdown-item font_12"><i class="fas fa-paw font_12 clrinfo mgnright5 fa-rotate-90"></i>LT Variables</li>
+        </ul>
+      </div>    
+    </div>
+  </div>
+  <div  class="row col-xl-8 col-lg-8 col-sm-6 col-md-6 col-xs-12">
+    <div id="gt768" class="col-lg-10 col-md-10 capitalize mgntop7" *ngIf = "showTitle" >{{cardTitle}}</div>
+    <div id= "gt576" class="col-lg-2 col-md-2" ngbDropdown class="d-inline-block" style="float:right;" title="Add">
+      <span class="fa-stack fa-1x mgntop2 apdpad2 mgnright25 pointer" id="menudropdown" ngbDropdownToggle> 
+          <i class="fa fa-circle fa-stack-2x  clr1b639e"></i> 
+          <i class="fa fa-plus fa-stack-1x clrwhite"></i>
+      </span>
+      <ul ngbDropdownMenu aria-labelledby="menudropdown" style="margin-left:-160px">
+          <li class="dropdown-item font_12" (click)="openDBAddConnModal()"><i class="fa fa-database font_12 clrgreen mgnright5"></i>Add DB Connection</li>
+          <li class="dropdown-item font_12"><i class="fas fa-code-branch font_12 clr1b639e mgnright5 fa-rotate-90" ></i>Add Service Map</li>
+          <li class="dropdown-item font_12" (click)="addCustomChart()"><i class="fas fa-chart-area font_12 clrdarkgoldenrod mgnright5"  ></i>Add Custom Charts</li>
+      </ul>
+    </div>    
+  </div>
+</div>
+<!-- Loading spinner -->
+<div *ngIf="isLoading" class="apdmodal" style="text-align: center; display:block; ">
+  <span class="fa-stack fa-2x" style="z-index:10;"> 
+      <i class="fa fa-circle fa-stack-2x" style="color:white; opacity:0.8;"></i> 
+      <i class="fas fa-spinner fa-spin fa-stack-1x" style="color:black;"></i>
+  </span>
+</div>
+<!-- Chart Visualization Card Content-->
+<div *ngIf = "showHtml == 'chartVisualHtml'" class="row container col-xl-12 col-lg-12 col-sm-12 col-md-12 col-xs-12">
+  <div *ngFor = "let ele of modCardData; let i = index" class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12" >
+    <div class="card text-white mb-3 mgntop10" [ngClass]="getBgColor(ele.module_type)">
+      <div  class="card-header">
+        <span class="fa-stack fa-1x">
+            <i class="fa fa-circle fa-stack-2x " [ngClass] ="getCardIconColor(ele.module_type)"></i>
+            <i class=" fa-stack-1x " [ngClass]="getFontAwsomeIcons(ele.module_type)"></i>
+        </span>
+        <i *ngIf = "ele.is_owner" class="far fa-trash-alt clrred mgnleft40 pointer" (click)="delChartVisual(ele.chart_id)"></i>
+        <i *ngIf = "ele.is_owner" class="fas fa-pencil-alt clrgreen mgnleft20 pointer" (click)="editChartVisual(ele.chart_id)"></i>
+        <i class="fas fa-cog clrorange mgnleft20"></i>
+        <span style="float:right;margin-top:3px">
+          <i class="fas fa-chart-area clryellow mgnright10 pointer" (click)="ViewChartVisual(ele)"></i>
+          <i class="fa fa-circle clrgreen"></i>
+        </span>
+      </div>
+      <div class="mgn2 padleft20" style = "height:75px;" >
+          <h6 class="capitalize">{{ele.chart_title +' '+ ele.category }}</h6>
+          <p class="font_10 capitalize">{{ele.chart_desc}}</p>
+      </div>
+      <div>
+        <span class="font_10 mgnleft5" style="opacity:0.8"> Added By {{ele.first_name}} on {{ele.created_on | date:'medium'}}<br></span>
+        <span class="font_10 mgnleft5" style="opacity:0.8"> {{cardBody2}} {{ele.dd_chart_id != null ?ele.dd_chart_name +' ('+ele.dd_chart_id+')' : ' Not configured' }} </span>
+      </div>
+      <div class="bg-secondary row container mgnleft0">
+          <div *ngIf="cardFooter1 != undefined" class="col-sm-6 col-xs-6 font_12 apdpad0" >{{cardFooter1}}:&nbsp;<span>{{ele.chart_id}}</span></div>
+          <div *ngIf="cardFooter2 != undefined" class="col-sm-6 col-xs-6 font_12 apdpad0 capitalize">{{cardFooter2}}:&nbsp;<span>{{ele.module_type}}</span></div>
+          <div *ngIf="cardFooter3 != undefined" class="col-sm col-xs font_12 apdpad0 capitalize" >{{cardFooter3}}:&nbsp;<span>{{ele.has_aggr_qry}}</span></div>
+          <div *ngIf="cardFooter3 != undefined" class="col-sm col-xs font_12 apdpad0 capitalize" >{{cardSubFooter3a}}:&nbsp;<span>{{ele.connector_name}}</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Module Master Card Statistics -->
+<div *ngIf = "showHtml == 'mmStatHtml'" class="row container col-xl-12 col-lg-12 col-sm-12 col-md-12 col-xs-12">
+  <div *ngFor = "let ele of mmStatCard; let i = index" class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-6">
+    <div class="card text-white mb-3 mgntop10 pointer" [ngClass]="getBgColorIdx(i)" (click)="getMMCard(ele.module_type,i)">
+      <div  class="card-header">
+        <span class="fa-stack fa-1x">
+            <i class="fa fa-circle fa-stack-2x captalize " [ngClass] ="getCardIconColor(mmModTypeIcon)"></i>
+            <i class=" fa-stack-1x " [ngClass]="getFontAwsomeIcons(mmModTypeIcon)"></i>
+        </span>
+        <span class="capitalize mgnleft20" [ngClass] = "{'font_12' : ele.module_type.length > 12,'mgnleft10' :ele.module_type.length > 12 ,'mgnleft20': ele.module_type.length <= 12 }" title="ele.module_type">{{ele.module_type.length>20?ele.module_type.substring(0,16)+'..' : ele.module_type}}</span>
+      </div>
+      <div class="mgn2" style = "height:30px;" >
+          <h4 class="apd-center">{{ele.count }}</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Chart Visualization Sub Category Statistics -->
+<div *ngIf = "showHtml == 'cvSCStatHtml'" class="row container col-xl-12 col-lg-12 col-sm-12 col-md-12 col-xs-12">
+  <div *ngFor = "let ele of cvSCStatCard; let i = index" class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12">
+    <div class="card text-white mb-3 mgntop10 pointer" [ngClass]="getBgColorIdx(i)" (click)="getCVCardByRefId(ele.ref_id,ele.module_name)">
+      <div  class="card-header">
+        <span class="fa-stack fa-1x">
+            <i class="fa fa-circle fa-stack-2x " [ngClass] ="getCardIconColor(cvSCIcon)"></i>
+            <i class=" fa-stack-1x " [ngClass]="getFontAwsomeIcons(cvSCIcon)"></i>
+        </span>
+        <span class="capitalize mgnleft20" [ngClass] = "{'font_12' : ele.module_name.length > 15,'mgnleft10' :ele.module_name.length > 15 ,'mgnleft20': ele.module_name.length <= 15 }" title="{{ele.module_name}}">{{ele.module_name.length>23?ele.module_name.substring(0,20)+'..' : ele.module_name}}</span>
+        <span class="capitalize mgnleft20" [ngClass] = "{'font_12' : ele.module_name.length > 20,'mgnleft10' :ele.module_name.length > 20 ,'mgnleft20': ele.module_name.length <= 20 }">(Uid {{ele.ref_id}})</span>      
+      </div>
+      <div class="mgn2" style = "height:30px;" >
+          <h4 class="apd-center">{{ele.count }}</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Chart Visualization Card Statistics -->
+<div *ngIf = "showHtml == 'cvStatHtml'" class="row container col-xl-12 col-lg-12 col-sm-12 col-md-12 col-xs-12">
+  <div *ngFor = "let ele of cvStatCard; let i = index" class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-6">
+    <div class="card text-white mb-3 mgntop10 pointer" [ngClass]="getBgColor(ele.module_type)" (click)="checkSubCategory(ele.module_type)">
+      <div  class="card-header">
+        <span class="fa-stack fa-1x">
+            <i class="fa fa-circle fa-stack-2x " [ngClass] ="getCardIconColor(ele.module_type)"></i>
+            <i class=" fa-stack-1x " [ngClass]="getFontAwsomeIcons(ele.module_type)"></i>
+        </span>
+        <span class="capitalize mgnleft20">{{ele.module_type}}</span>
+      </div>
+      <div class="mgn2" style = "height:30px;" >
+          <h4 class="apd-center">{{ele.count }}</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- DB Connector Card Content -->
+<div *ngIf = "showHtml == 'dbconnectorHtml'" class="row container col-xl-12 col-lg-12 col-sm-12 col-md-12 col-xs-12" >
+  <div *ngFor = "let dbCon of modCardData; let i = index" class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12" >
+    <div class="card text-white mb-3 mgntop10" [ngClass]="getBgColor('DBConnector')">
+      <div  class="card-header">
+        <span class="fa-stack fa-1x">
+            <i class="fa fa-circle fa-stack-2x"  [ngClass] ="getCardIconColor('DBConnector')"></i>
+            <i class="fas fa-database fa-stack-1x" [ngClass]="getFontAwsomeIcons('DBConnector')"></i>
+        </span>
+        <i class="far fa-trash-alt clrred mgnleft40"></i>
+        <i class="fas fa-pencil-alt clrgreen mgnleft20 pointer" (click)="openDBConnModal(dbCon.db_id)"></i>
+        <i class="fas fa-cog clrorange mgnleft20"></i>
+        <span style="float:right;margin-top:3px">
+          <i class="fas fa-chart-area clryellow mgnright10"></i>
+          <i class="fa fa-circle clrgreen"></i>
+        </span>
+      </div>
+      <div class="mgn2 padleft20" style = "height:75px;" >
+          <h6 class="capitalize">{{dbCon.connector_name }}</h6>
+          <p class="font_10 capitalize">{{dbCon.connection_details != null ? 'Host: '+dbCon.connection_details.host +' :: Database : '+ dbCon.connection_details.database : 'No Name given'}}</p>
+      </div>
+      <div>
+        <span class="font_10 mgnleft5" style="opacity:0.8"> Added By {{dbCon.first_name}} on {{dbCon.created_on | date:'medium'}}<br></span>
+        <span class="font_10 mgnleft5" style="opacity:0.8"> {{cardBody2}} {{dbCon.last_validated_on | date:'medium'}} </span>
+      </div>
+      <div class="bg-secondary row container mgnleft0">
+          <div *ngIf="cardFooter2 != undefined" class="col-sm-6 col-xs-6 font_12 apdpad0">{{cardFooter2}}:&nbsp;<span>{{dbCon.db_id}}</span></div>
+          <div *ngIf="cardFooter1 != undefined" class="col-sm-6 col-xs-6 font_12 apdpad0" >{{cardFooter1}}:&nbsp;<span>{{chartMappedCnt[i]}}</span></div>
+          <!-- <div *ngIf="cardFooter3 != undefined" class="col-sm col-xs font_12 apdpad0" >{{cardFooter3}}:&nbsp;</div>
+          <div *ngIf="cardFooter3 != undefined" class="col-sm col-xs font_12 apdpad0" ><i class="far fa-thumbs-up clrgreen"></i>&nbsp;<span class="clrgreen">10</span></div>
+          <div *ngIf="cardFooter3 != undefined" class="col-sm col-xs font_12 apdpad0" ><i class="fas fa-exclamation clryellow"></i>&nbsp;<span class="clryellow">10</span></div>
+          <div *ngIf="cardFooter3 != undefined" class="col-sm col-xs font_12 apdpad0"><i class="fas fa-thumbs-down clrred"></i>&nbsp;<span class="clrred">10</span></div> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Chart/Table Modal for vieweing chart -->
+<div *ngIf="canDrawChart" id="myModal" [ngStyle]="{'display':modalDisplay}" class="apdmodal">
+  <!-- Modal content -->
+  <div  class="apdmodal-content">
+    <div class="">
+      <span>{{chartTitle}}</span>
+      <span class="apdclose" (click)="openModal('close')">&times;</span>
+      <span style="text-align:right;" style="float:right;"  class="mgntop10 mgnright10 pointer"><i class="fas fa-tachometer-alt clrinfo" title ="Add to MyChart" (click)="enableAddMychart()"></i></span>
+      <!-- <span class="badge badge-pill badge-success apdsave pointer" style="float:right;" (click)="acceptCV()">Accept</span> -->
+    </div>
+    <div [hidden]="!myChart"class="row">
+      <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 apd-frmfld" style="margin-left:10px; margin-top:5px;">
+          <input type="text" class="font_12 " type="text" placeholder="Enter New myChart Name" [(ngModel)]="myChartName" (blur)="onEditMyChartName()" />
+      </div>
+      <span class="mgntop10 font_10">OR</span>
+      <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 apd-apmslct" style="margin:0px">
+          <div ngbDropdown class="d-inline-block" >
+              <button class="btn btn-outline-info"  id="myChartDropDown" ngbDropdownToggle>{{myChartSelVal}}</button>
+              <ul ngbDropdownMenu aria-labelledby="myChartDropDown" style="max-height:200px; overflow:auto;">
+                  <i *ngFor = "let ele of myChartColl"  class="dropdown-item font_12" (click)="myChartChanged(ele.mc_name)">{{ele.mc_name}}</i>
+              </ul>
+          </div>
+      </div>
+      <div class = "col-lg-2 col-md-2 col-sm-2 col-xs-4 mgntop5">
+          <span><i class="fa fa-check-circle font_17 clrgreen pointer ad-mgrgt5" title="add to myChart" (click)="addToMyChart()"></i></span>
+          <span><i class="fa fa-times-circle font_17 clrred pointer" title="cancel" (click)="cancelEditMyChart(i)"></i></span>
+      </div>
+    </div>
+    <!-- drawing charts when table not selected in root chart type-->
+    <div *ngIf="!isTable" id="0" appD3chartsv3 [chartdata]="d3ChartData" [width] = "chartWidth-50" [height]="chartHt-20" [chartType]="d3RootChartType"></div>
+    <!-- Table selected in root chart type -->
+    <div *ngIf="isTable" style="height:400px; overflow-y:scroll;">
+      <table class="table table-hover">
+        <tr class="table-warning">
+          <th class="capitalize" scope="row" *ngFor= "let rowheader of objectKeys(customQryRes[0])">{{rowheader}}</th>
+        </tr>
+        <tr *ngFor ="let row of customQryRes; let i = index">
+          <td class="capitalize" *ngFor = "let values of objectValues(customQryRes[i])">{{values}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- Module Master Card Content -->
+<div *ngIf = "showHtml == 'mmCardHtml'" class="row container col-xl-12 col-lg-12 col-sm-12 col-md-12 col-xs-12" >
+  <div *ngFor = "let ele of modCardData; let i = index" class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12" >
+    <div class="card text-white mb-3 mgntop10" [ngClass]="getBgColorIdx(cardIdx)">
+      <div  class="card-header">
+        <span class="fa-stack fa-1x">
+            <i class="fa fa-circle fa-stack-2x"  [ngClass] ="getCardIconColor(mmModTypeIcon)"></i>
+            <i class="fas fa-database fa-stack-1x" [ngClass]="getFontAwsomeIcons(mmModTypeIcon)"></i>
+        </span>
+        <i class="far fa-trash-alt clrred mgnleft40"></i>
+        <i class="fas fa-pencil-alt clrgreen mgnleft20 pointer" (click)="EditMMCard(ele.uid)"></i>
+        <i class="fas fa-cog clrorange mgnleft20"></i>
+        <span style="float:right;margin-top:3px">
+          <i class="fas fa-chart-area clryellow mgnright10 pointer" (click)="drawChart(ele)"></i>
+          <i class="fa fa-circle " [ngClass]="{'clrgreen':ele.active, 'clrred': !ele.active}" title="{{ele.active ? 'running' :'No Data for last 1 Min, check last received on'}}"></i>
+        </span>
+      </div>
+      <div class="mgn2 padleft20" style = "height:75px;" >
+          <h6 class="capitalize">{{ele.module_name }}</h6>
+          <p class="font_10 capitalize">{{ele.description.length>70 ? ele.description.substring(0,67)+'...':ele.description}}</p>
+      </div>
+      <div>
+        <span class="font_10 mgnleft5" style="opacity:0.8"> Added By {{ele.first_name}} on {{ele.created_on | date:'medium'}}<br></span>
+        <span class="font_10 mgnleft5" style="opacity:0.8"> {{cardBody2}} {{ele.last_appedo_received_on == undefined ?"Not Available" : ele.last_appedo_received_on | date:'medium'}} </span>
+      </div>
+      <div class="bg-secondary row container mgnleft0">
+          <div *ngIf="cardFooter2 != undefined" class="col-sm-4 col-xs-4 font_12 apdpad0">{{cardFooter1}}:&nbsp;<span>{{ele.uid}}</span></div>
+          <div *ngIf="cardFooter1 != undefined" class="col-sm-4 col-xs-4 font_12 apdpad0" >{{cardFooter2}}:&nbsp;<span><i *ngIf="mmCardAvlConfig[i] == undefined || mmCardAvlConfig[i].available == undefined" class="fas fa-life-ring fa-spin"></i>{{mmCardAvlConfig[i] == undefined || mmCardAvlConfig[i].available == undefined ? undefined:mmCardAvlConfig[i].available}}</span></div>
+          <div *ngIf="cardFooter1 != undefined" class="col-sm-4 col-xs-4 font_12 apdpad0" >{{cardFooter2a}}:&nbsp;<span><i *ngIf="mmCardAvlConfig[i] == undefined || mmCardAvlConfig[i].configured == undefined" class="fas fa-life-ring fa-spin"></i>{{mmCardAvlConfig[i] == undefined || mmCardAvlConfig[i].configured == undefined ? undefined:mmCardAvlConfig[i].configured}}</span></div>
+          <div *ngIf="cardFooter3 != undefined" class="col-sm col-xs font_12 apdpad0 mgntop5" >{{cardFooter3}}:&nbsp;</div>
+          <div *ngIf="cardFooter3 != undefined" class="col-sm col-xs font_12 apdpad0" title="Healthy" ><i class="far fa-thumbs-up clrgreen"></i>&nbsp;<span class="clrgreen font_16"><i *ngIf="mmCardMetricStatus[i] == undefined || mmCardMetricStatus[i].healthy == undefined" class="fas fa-life-ring fa-spin"></i>{{mmCardMetricStatus[i] != undefined && mmCardMetricStatus[i].healthy != undefined ? mmCardMetricStatus[i].healthy : undefined}}</span></div>
+          <div *ngIf="cardFooter3 != undefined" class="col-sm col-xs font_12 apdpad0" title="Warning"><i class="fas fa-exclamation clryellow"></i>&nbsp;<span class="clryellow font_16"><i *ngIf="mmCardMetricStatus[i] == undefined || mmCardMetricStatus[i].warning == undefined" class="fas fa-life-ring fa-spin"></i>{{mmCardMetricStatus[i] == undefined || mmCardMetricStatus[i].warning == undefined ? undefined : mmCardMetricStatus[i].warning}}</span></div>
+          <div *ngIf="cardFooter3 != undefined" class="col-sm col-xs font_12 apdpad0" title="Critical"><i class="fas fa-thumbs-down clrred"></i>&nbsp;<span class="clrred font_16"><i *ngIf="mmCardMetricStatus[i] == undefined || mmCardMetricStatus[i].critical == undefined" class="fas fa-life-ring fa-spin"></i>{{mmCardMetricStatus[i] == undefined || mmCardMetricStatus[i].critical == undefined ? undefined : mmCardMetricStatus[i].critical}}</span></div>
+      </div>
+    </div>
+  </div>
+</div>

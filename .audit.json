@@ -1,0 +1,219 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "./.audit.json",
+    "files": [
+        {
+            "date": 1523166602867,
+            "name": "appedo-2018-04-08.log",
+            "hash": "12575795cc954a9b5b13bbb98b35f783"
+        },
+        {
+            "date": 1523166605403,
+            "name": "appedo-2018-04-08.log",
+            "hash": "93d680acd72f9611db630215f927c41e"
+        },
+        {
+            "date": 1523167677327,
+            "name": "appedo-2018-04-08.log",
+            "hash": "21aef2281951d0ba85f90f5cc5c8b08e"
+        },
+        {
+            "date": 1523167679677,
+            "name": "appedo-2018-04-08.log",
+            "hash": "75f9f5e651c1aa73e63b7410a08a8641"
+        },
+        {
+            "date": 1523167758927,
+            "name": "appedo-2018-04-08.log",
+            "hash": "5fee859444017f191b913e3ba58fc439"
+        },
+        {
+            "date": 1523167761428,
+            "name": "appedo-2018-04-08.log",
+            "hash": "9fdc2a0f31e89724873b462760c706fe"
+        },
+        {
+            "date": 1523167851938,
+            "name": "appedo-2018-04-08.log",
+            "hash": "50de1e3b36b6f363111ca4c341d61f4d"
+        },
+        {
+            "date": 1523167854699,
+            "name": "appedo-2018-04-08.log",
+            "hash": "7b5e94e7cfae93b52a4c0d5b00c3475c"
+        },
+        {
+            "date": 1523167884972,
+            "name": "appedo-2018-04-08.log",
+            "hash": "9f597ec9ccf4610040bfd6ac0115b0b0"
+        },
+        {
+            "date": 1523167888083,
+            "name": "appedo-2018-04-08.log",
+            "hash": "f69eb79809b5a1a80a584e01731301fb"
+        },
+        {
+            "date": 1523168002900,
+            "name": "appedo-2018-04-08.log",
+            "hash": "d0d5728c030c24b2f613d6f27ff8e74e"
+        },
+        {
+            "date": 1523168005377,
+            "name": "appedo-2018-04-08.log",
+            "hash": "6ed7b09e11237463a4c8444e802783d9"
+        },
+        {
+            "date": 1523168147732,
+            "name": "appedo-2018-04-08.log",
+            "hash": "dcff6dabaae4ade8135904c4bc4d1eeb"
+        },
+        {
+            "date": 1523168150625,
+            "name": "appedo-2018-04-08.log",
+            "hash": "d8891164ed47242edd27aa87912941af"
+        },
+        {
+            "date": 1523168607798,
+            "name": "appedo-2018-04-08.log",
+            "hash": "1a0cb005b02adf509b185af762cd4911"
+        },
+        {
+            "date": 1523168610723,
+            "name": "appedo-2018-04-08.log",
+            "hash": "4cc9449c3c9c1fdd80b74ee8a412c6f6"
+        },
+        {
+            "date": 1523168945453,
+            "name": "appedo-2018-04-08.log",
+            "hash": "9eb329201bdf71c8ad79880272b956d5"
+        },
+        {
+            "date": 1523168947814,
+            "name": "appedo-2018-04-08.log",
+            "hash": "90a3e9533d9f099f3000e5bcf55a2b36"
+        },
+        {
+            "date": 1523171787343,
+            "name": "appedo-2018-04-08.log",
+            "hash": "8c3feaf18b38f38c61a6772ab2b79bc3"
+        },
+        {
+            "date": 1523171790025,
+            "name": "appedo-2018-04-08.log",
+            "hash": "054a14f1ad3cefdeadf703cfa863d5a4"
+        },
+        {
+            "date": 1523171916846,
+            "name": "appedo-2018-04-08.log",
+            "hash": "b4dce7927942e8e1ab43448c58edd799"
+        },
+        {
+            "date": 1523171919767,
+            "name": "appedo-2018-04-08.log",
+            "hash": "0ce88a636f5886d733671b1ae7932ad1"
+        },
+        {
+            "date": 1523172068890,
+            "name": "appedo-2018-04-08.log",
+            "hash": "81d81777613e23e9a164e5b862f7eb69"
+        },
+        {
+            "date": 1523172071883,
+            "name": "appedo-2018-04-08.log",
+            "hash": "ef4eb54181241cda958a5d9552ec1c32"
+        },
+        {
+            "date": 1523172128015,
+            "name": "appedo-2018-04-08.log",
+            "hash": "5bc3c12f8235770629ee4b5df8ff2457"
+        },
+        {
+            "date": 1523172130370,
+            "name": "appedo-2018-04-08.log",
+            "hash": "b110ba84769c7f7768f8b361fa10e4cf"
+        },
+        {
+            "date": 1523172500524,
+            "name": "appedo-2018-04-08.log",
+            "hash": "34137dcad7f9dec64fd6e516ffdf602d"
+        },
+        {
+            "date": 1523172503088,
+            "name": "appedo-2018-04-08.log",
+            "hash": "890bf3e0ac27eb4ff7e7ae3efb74fe43"
+        },
+        {
+            "date": 1523172587478,
+            "name": "appedo-2018-04-08.log",
+            "hash": "74ca4259cf3ae970a97368463822d5ab"
+        },
+        {
+            "date": 1523172589952,
+            "name": "appedo-2018-04-08.log",
+            "hash": "733ec62cac24ac4d68756c8013736e68"
+        },
+        {
+            "date": 1523172610805,
+            "name": "appedo-2018-04-08.log",
+            "hash": "1e6f80800a7dc82b7bc8c58e6a61a164"
+        },
+        {
+            "date": 1523172613332,
+            "name": "appedo-2018-04-08.log",
+            "hash": "0e8f336fd52b4b7e92bc855a06ef5c8e"
+        },
+        {
+            "date": 1523172921564,
+            "name": "appedo-2018-04-08-05.log",
+            "hash": "3ec189589cacac1cf8c857da1a717f4b"
+        },
+        {
+            "date": 1523172925046,
+            "name": "appedo-2018-04-08-05.log",
+            "hash": "173d6e4a25e1ea4c1ef02a69ad127bb5"
+        },
+        {
+            "date": 1523173168379,
+            "name": "appedo-2018-04-08-09.log",
+            "hash": "ebc7f4dd0298ebbc1504ddd7b5006fa7"
+        },
+        {
+            "date": 1523173170814,
+            "name": "appedo-2018-04-08-09.log",
+            "hash": "5cb8514e5e236155ecb025987d525fde"
+        },
+        {
+            "date": 1523174890201,
+            "name": "appedo-2018-04-08-38.log",
+            "hash": "a6db3b6a81462b51ca5b49447aba8b35"
+        },
+        {
+            "date": 1523174892785,
+            "name": "appedo-2018-04-08-38.log",
+            "hash": "3676c9fab91311ad57c9b2f34b07e89a"
+        },
+        {
+            "date": 1523174944570,
+            "name": "appedo-2018-04-08-39.log",
+            "hash": "219207d697a81a8eb3714c87f1ccc4f8"
+        },
+        {
+            "date": 1523174947669,
+            "name": "appedo-2018-04-08-39.log",
+            "hash": "14693a05e0c4f637d0d5ba6af89b9ffb"
+        },
+        {
+            "date": 1523175120835,
+            "name": "appedo-2018-04-08-41.log",
+            "hash": "f871814ad452028de3953aa5b98a396e"
+        },
+        {
+            "date": 1523175123508,
+            "name": "appedo-2018-04-08-42.log",
+            "hash": "01abd7a5ce0ef255dbab5342cd15248e"
+        }
+    ]
+}

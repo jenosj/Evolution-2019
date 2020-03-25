@@ -1,0 +1,142 @@
+
+<div class="modal-dialog " role="document">
+  <div class="modal-content" style="border: none;">
+    <form class="font_12" [formGroup]="form" (submit)="dbConnSubmit()">
+      <div class="modal-header" style="margin-top: -25px;">
+        <h5 class="modal-title">
+          <span class="fa-stack fa-1x mgntop2 apdpad2" style="float: left">
+              <i class="fa fa-circle fa-stack-2x  clrwarning"></i>
+              <i class="fas fa-database fa-stack-1x clrblack"></i>
+          </span> 
+          <span style="margin-left:20px; vertical-align:sub"> {{pageTitle}} </span>
+          <span style="margin-left:20px; vertical-align:sub; font-size:12px"  [ngClass]="{'text-danger':(!isValidated), 'text-success': (isValidated)}" >{{validationText}}</span>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onCloseHandled()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-4 col-md-4">
+            <label class="mgnleft5">Engine Name <br></label>
+            <div ngbDropdown class="d-inline-block" >
+              <label class="btn btn-outline-info font_12"  id="dropdownBasic1" ngbDropdownToggle>{{engSelVal}}</label>
+              <ul ngbDropdownMenu aria-labelledby="dropdownBasic1" style="max-height:200px; overflow:auto;">
+                  <i class="dropdown-item font_12" (click)="engChanged('PostgreSQL')">PostgreSQL</i>
+                  <i class="dropdown-item font_12" (click)="engChanged('MySQL')">MySQL</i>
+                  <i class="dropdown-item font_12" (click)="engChanged('Oracle')">Oracle</i>
+                  <i class="dropdown-item font_12" (click)="engChanged('MSSQL')">MSSQL</i>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <div class="form-group apd-frmfld apd-left ">
+              <label class="font_12" for="ConnectorName">Connector Name</label>
+              <div [ngClass] ="{'text-danger': (form.controls.ConnectorName.errors && form.controls.ConnectorName.dirty),'text-success': !form.controls.ConnectorName.errors}">
+                  <input type="text" class="apd-form-control-dark capitalize" placeholder="Connector Name" formControlName="ConnectorName" name="ConnectorName" id="ConnectorName">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <div class="form-group apd-frmfld apd-left ">
+              <label class="font_12" for="Database">Database Name</label>
+              <div [ngClass] ="{'text-danger': (form.controls.Database.errors && form.controls.Database.dirty),'text-success': !form.controls.Database.errors}">
+                  <input type="text" class="apd-form-control-dark" placeholder="Database Name" formControlName="Database" name="Database" id="Database">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8 col-md-8">
+            <div class="form-group apd-frmfld apd-left ">
+              <label class="font_12" for="Host">Host Name</label>
+              <div [ngClass] ="{'text-danger': (form.controls.Host.errors && form.controls.Host.dirty),'text-success': !form.controls.Host.errors}">
+                  <input type="text" class="apd-form-control-dark" placeholder="Host Name" formControlName="Host" name="Host" id="Host">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <div class="form-group apd-frmfld apd-left ">
+              <label class="font_12" for="Port">Port Number</label>
+              <div [ngClass] ="{'text-danger': (form.controls.Port.errors && form.controls.Port.dirty),'text-success': !form.controls.Port.errors}">
+                  <input type="text" class="apd-form-control-dark" placeholder="Port Number" formControlName="Port" name="Port" id="Port">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-4">
+            <div class="form-group apd-frmfld apd-left ">
+              <label class="font_12" for="User">Db User Name</label>
+              <div [ngClass] ="{'text-danger': (form.controls.User.errors && form.controls.User.dirty),'text-success': !form.controls.User.errors}">
+                  <input type="text" class="apd-form-control-dark" placeholder="Db User Name" formControlName="User" name="User" id="User">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <div class="form-group apd-frmfld apd-left ">
+              <label class="font_12" for="Password">Db password</label>
+              <div [ngClass] ="{'text-danger': (form.controls.Password.errors && form.controls.Password.dirty),'text-success': !form.controls.Password.errors}">
+                  <input type="password" class="apd-form-control-dark" placeholder="DB Password" formControlName="Password" name="Password" id="Password">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4">
+              <div class="form-group apd-frmfld apd-left ">
+                <label class="font_12" for="Confirm">Confirm Password</label>
+                <div [ngClass] ="{'text-danger': (form.controls.Confirm.errors && form.controls.Confirm.dirty),'text-success': !form.controls.Confirm.errors}">
+                    <input type="password" class="apd-form-control-dark" placeholder="Confirm Password" formControlName="Confirm" name="Confirm" id="Confirm">
+                </div>
+              </div>
+          </div>
+        </div>
+        <ul class="help-block">
+            <div [ngClass] ="{'text-danger': (form.controls.ConnectorName.errors && form.controls.ConnectorName.dirty),'text-success': !form.controls.ConnectorName.errors}">
+              <li class="font_12" *ngIf="form.controls.ConnectorName.errors?.required && form.controls.ConnectorName.dirty">This field is required.</li>
+              <li class="font_12" *ngIf="form.controls.ConnectorName.errors?.minlength || form.controls.ConnectorName.errors?.maxlength">Minimum length 3 & maximum length 30 characters .</li>
+              <li *ngIf="form.controls.ConnectorName.errors?.validateName">Name must be characters. No special characters or numbers.</li>
+            </div>
+            <div [ngClass] ="{'text-danger': (form.controls.Database.errors && form.controls.Database.dirty),'text-success': !form.controls.Database.errors}">
+                <li class="font_12" *ngIf="form.controls.Database.errors?.required && form.controls.Database.dirty">This field is required.</li>
+            </div>
+            <div [ngClass] ="{'text-danger': (form.controls.Host.errors && form.controls.Host.dirty),'text-success': !form.controls.Host.errors}">
+              <li class="font_12" *ngIf="form.controls.Host.errors?.required && form.controls.Host.dirty">Host field is required.</li>
+              <li class="font_12" *ngIf="form.controls.Host.errors?.validateHost && form.controls.Host.dirty">Host: Only IP Address or URL is allowed</li>
+            </div>
+            <div [ngClass] ="{'text-danger': (form.controls.User.errors && form.controls.User.dirty),'text-success': !form.controls.User.errors}">
+              <li class="font_12" *ngIf="form.controls.User.errors?.required && form.controls.User.dirty">User field is required.</li>
+              <li class="font_12" *ngIf="form.controls.User.errors?.validateUsrName && form.controls.User.dirty">User must be alpha numeric with/without underscore</li>
+            </div>
+            <div [ngClass] ="{'text-danger': (form.controls.Password.errors && form.controls.Password.dirty),'text-success': !form.controls.Password.errors}">
+                <li class="font_12" *ngIf="form.controls.Password.errors?.required && form.controls.Password.dirty">Password field is required.</li>
+            </div>
+            <div [ngClass] ="{'text-danger': (form.controls.Port.errors && form.controls.Port.dirty),'text-success': !form.controls.Port.errors}">
+                <li class="font_12" *ngIf="form.controls.Port.errors?.required && form.controls.Port.dirty">Port field is required.</li>
+                <li class="font_12" *ngIf="form.controls.Port.errors?.validatePort && form.controls.Port.dirty">Port must be numeric.</li>
+            </div>
+            <div [ngClass] ="{'text-danger': ((form.controls.Confirm.errors && form.controls.Confirm.dirty) || form.errors?.matchingPasswords),'text-success': !form.controls.Confirm.errors && !form.errors?.matchingPasswords}">
+              <li *ngIf ="form.errors?.matchingPasswords && form.controls.Confirm.dirty">Password do not match.</li>    
+            </div>    
+            <div [ngClass] ="{'text-danger': !isEngValidated }">
+              <li *ngIf ="!isEngValidated">Engine Name cannot be empty</li>    
+            </div>    
+            <div [ngClass] ="{'text-danger': displayError !=undefined }">
+              <li *ngIf ="!isValidated && displayError != undefined" class="font_12">{{displayError}}</li>    
+            </div>    
+        </ul>
+      </div>
+      <div class="modal-footer" style="margin-bottom: -25px;">
+        <button *ngIf = "form.valid" [ngStyle]="{'display':dispValidate}" type="button" class="btn btn-primary" (click)="validateConn()" title="Validate Connection"><i class="fas fa-external-link-square-alt"></i></button>
+        <button *ngIf ="isValidated" type="button" class="btn btn-success" (click)="dbConnSubmit()"><i class="far fa-save"></i></button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseHandled()">Close</button>
+      </div>
+    </form>
+  </div>
+    <!-- Loading spinner -->
+  <div *ngIf="isLoading" class="apdmodal" style="text-align: center; display:block; ">
+    <span class="fa-stack fa-2x" style="z-index:10;"> 
+      <i class="fa fa-circle fa-stack-2x" style="color:white; opacity:0.8;"></i> 
+      <i class="fas fa-spinner fa-spin fa-stack-1x" style="color:black;"></i>
+    </span>
+  </div>
+</div>

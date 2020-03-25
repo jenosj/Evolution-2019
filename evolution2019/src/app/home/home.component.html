@@ -1,0 +1,13 @@
+﻿<app-login-header></app-login-header>
+<div class="col-md-6 col-md-offset-3">
+    <h1>Hi {{userName}}!</h1>
+    <p>You're logged in with Angular 2/5 and Angular CLI!!</p>
+    <ul>
+        <li> {{email}}</li>
+        <li> {{userName}} </li>
+        <li> {{mobile_no}} </li>
+    </ul>
+    <p><a [routerLink]="['/profile']">Profile</a></p>
+    <p><a [routerLink]="['/dashboard']">Dashboard</a></p>
+    <p><a [routerLink]="['/modulecard']">Module</a></p>
+</div>

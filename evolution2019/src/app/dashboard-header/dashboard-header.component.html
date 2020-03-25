@@ -1,0 +1,146 @@
+<app-login-header></app-login-header>
+<!-- Dashboard Header HTML -->
+<div class="row " style="margin: auto;" >
+    <div *ngIf="!isFromMyChart" class="col-xl-3 col-lg-3 col-sm-2 col-md-2 col-xs-5 mgnauto">
+        <span><i class="fas fa-angle-double-left clrwheat pointer mgntop7" (click)="onBackFromDash()" title="Back"></i></span>
+        <span>{{uidLabel}}</span>
+    </div>
+    <div *ngIf ="isFromMyChart" class="col-xl-3 col-lg-3 col-sm-2 col-md-2 col-xs-5 mgnauto">
+        <div ngbDropdown class="d-inline-block" >
+            <button class="btn btn-outline-info"  id="dropdownBasic1" ngbDropdownToggle>{{dashSelVal}}</button>
+            <ul ngbDropdownMenu aria-labelledby="dropdownBasic1" style="max-height:200px; overflow:auto;">
+                <i *ngFor = "let coll_item of dashboardColl"  class="dropdown-item font_12" (click)="myDashChanged(coll_item.mc_name)">{{coll_item.mc_name}}</i>
+            </ul>
+        </div>
+    </div>
+    <div *ngIf ="isFromMyChart" id="gt1024" class="col-xl-1 col-lg-1 col-sm-1 col-md-1 col-xs-1 mgnauto"  >
+        <span><i *ngIf="editChartMode && chartDetails.length>0" class="far fa-edit font_18 mgntop5 clryellow" (click)="toggleEditMode()" title="{{editModeTitle}}"></i></span>
+        <span><i *ngIf="editChartMode && chartDetails.length>0" class="far fa-check-circle mgntop5 apdpad2 clrsuccess" (click) = "saveChartParam()" title="Save"></i></span>
+        <span><i *ngIf="editChartMode && chartDetails.length>0" class="far fa-times-circle mgntop5 apdpad2 clrdanger" (click)="toggleEditMode()" title="Cancel"></i></span>
+        <span ><i  *ngIf="!editChartMode && chartDetails.length>0" class="far fa-edit font_18 mgntop5 clrdanger"(click)="toggleEditMode()" title="{{editModeTitle}}"></i></span>
+    </div>
+    <div  *ngIf = "showSlider" class="col-xl-4 col-lg-4 col-sm-4 col-md-6 col-xs-6 mgnauto" style="display:inherit;" >
+        <div class="col-lg-9 col-sm-9 col-md-9 col-xs-9" style="margin-top:-22px;" >
+            <ion-range-slider grid = true hide_min_max=true hide_from_to=true from="{{sliderFrom}}" [values]="['1 hr', '3 hrs', '6 hrs','12 hrs','1 day', '7 days', '15 days']" (onFinish)="onSliderFinish($event)"> </ion-range-slider>
+        </div>
+        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2"  >
+            <i  class="fa fa-calendar-alt pointer clrgreen" title ="Show Custom DateTime Filter"  (click) = "showDtPicker()"></i>
+        </div>
+    </div>
+    <div *ngIf = "!showSlider" class="col-xl-4 col-lg-4 col-sm-4 col-md-4 col-xs-6 mgnauto" style="display:inherit;" >
+        <div class="col-lg-9 col-sm-9 col-md-9 col-xs-9">
+            <input  class="btn-outline-info font_12" style="width:100%" [owlDateTime]="dt1" [max] = "max" [min]="min"
+                    [selectMode]="'range'" [formControl]="SelectedDateTime" [owlDateTimeTrigger]="dt1" (dateTimeChange)="dtChanged($event)" >
+            <owl-date-time [pickerMode]="'popup'" #dt1 style="min-height:200px"></owl-date-time>
+        </div>
+        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2">
+            <i  class="fa fa-sliders-h pointer clrgreen" title ="Show Slider" (click) = "showDtPicker()"></i>
+        </div>
+    </div>
+    <div  class="col-xl-4 col-lg-4 col-sm-4 col-md-4 col-xs-6 mgnauto apd-right" style="display:inherit;" >
+        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2 mgnauto pointer apdpad0" title="Manage Chart">
+            <span class="fa-stack fa-1x mgntop2 apdpad2">
+                <i class="fa fa-circle fa-stack-2x  clrred"></i>
+                <i class="fa fa-chart-line fa-stack-1x clrwheat"></i>
+            </span>
+        </div>
+        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2 mgnauto pointer apdpad0" title="Manage Modules">
+            <a [routerLink]="['/modulecard']">
+                <span class="fa-stack fa-1x mgntop2" style="margin-top:4px;">
+                    <i class="fa fa-circle fa-stack-2x  clrteal"></i>
+                    <i class="fa fa-boxes fa-stack-1x clrsecondary"></i>
+                </span>
+            </a>
+        </div>
+        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2 mgnauto pointer apdpad0 " title="Manage Synthetic User Monitoring">
+            <span class="fa-stack fa-1x mgntop2 apdpad2">
+                <i class="fa fa-circle fa-stack-2x  clr1b639e"></i>
+                <i class="fab fa-android fa-stack-1x clrwhite"></i>
+            </span>        
+        </div>
+        <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2 mgnauto pointer apdpad0 " title="Manage Real User Monitoring">
+            <span class="fa-stack fa-1x mgntop2 apdpad2">
+                <i class="fa fa-circle fa-stack-2x  clrwarning"></i>
+                <i class="fas fa-users fa-stack-1x "></i>
+            </span>        
+        </div>
+        <!-- <div id="gt768"class="col-lg-2 col-sm-2 col-md-2 col-xs-2 mgnauto pointer apdpad0 " title="Manage Other Modules" >
+            <div ngbDropdown class="d-inline-block">
+                <span class="fa-stack fa-1x mgntop2 apdpad2" id="menudropdown" ngbDropdownToggle> 
+                    <i class="fa fa-circle fa-stack-2x  clr1b639e"></i> 
+                    <i class="fa fa-plus fa-stack-1x clrwhite"></i>
+                </span>
+                <ul ngbDropdownMenu aria-labelledby="menudropdown" style="margin-left:-180px">
+                    <li class="dropdown-item font_12"><i class="fa fa-database font_12 clrgreen mgnright5"></i>Manage DB Connection</li>
+                    <li class="dropdown-item font_12"><i class="fas fa-code-branch font_12 clr1b639e mgnright5" data-fa-transform="rotate-90"></i>Manage Service Map</li>
+                </ul>
+            </div>    
+        </div> -->
+    </div>
+</div>
+<!-- Static message on edit mode -->
+<div  *ngIf="editChartMode" class="clrsuccess" style="margin-top:-22px; margin-left:34px;">Click on the chart before resize action</div>
+<!-- Loading spinner -->
+<div *ngIf="isLoading" class="apdmodal" style="text-align: center; display:block; ">
+    <span class="fa-stack fa-2x" style="z-index:10;"> 
+        <i class="fa fa-circle fa-stack-2x" style="color:white; opacity:0.8;"></i> 
+        <i class="fas fa-spinner fa-spin fa-stack-1x" style="color:black;"></i>
+    </span>
+</div>
+<!-- Dashboard body HTML -->
+<div *ngIf="editChartMode">
+    <div  *ngFor = "let chart of drawChartData; let i = index">
+        <div id="{{i}}" class='chart-edit-mode' [style.top.px]='y[i]'
+                    [style.left.px]='x[i]'
+                    [style.width.px]='width[i]'
+                    [style.height.px]='height[i]'
+                    (mousedown)='onWindowPress($event, i)'
+                    (mousemove)='onWindowDrag($event)'>
+            <div>
+                <span class="font_10 mgnleft10">{{chart.chart_title}}</span>
+                
+            </div>
+            <div id="{{i}}" appD3chartsv3 [chartdata]="chart" [width] = "d3width[i]-20" [height]="d3height[i]-30" [chartType]="chart.root_chart_type"></div>    
+            <div (mousedown)='onCornerClick($event, topLeftResize)' id='chart-top-left-resize' class='chart-corner-topleft-resize '></div>    
+            <div (mousedown)='onCornerClick($event, topRightResize)' id='chart-top-right-resize' class='chart-corner-topright-resize '></div>    
+            <div (mousedown)='onCornerClick($event, bottomLeftResize)' id='chart-bottom-left-resize' class='chart-corner-topright-resize '></div>    
+            <div (mousedown)='onCornerClick($event, bottomRightResize)' id='chart-bottom-right-resize' class='chart-corner-topleft-resize'></div>    
+        </div> 
+    </div>
+</div>
+<div *ngIf="!editChartMode">
+    <div class="chart-parrent" *ngFor = "let chart of drawChartData; let i = index">
+        <div class="chart" id="{{chart.chart_id}}" [style.left.px]='x[i]' [style.top.px]='y[i]' [style.width.px]='width[i]' [style.height.px]='height[i]'>
+            <div [hidden]="myChart[i]">
+                <span class="font_10 mgnleft10" sltyle="float:left" title="{{chart.chart_title+' '+chart.category}}">{{(chart.chart_title+' '+chart.category).length >70 ?(chart.chart_title+' '+chart.category).substring(1,67)+"...":chart.chart_title+' '+chart.category}}</span>
+                <div style="float:right" class="mgnright5 ">
+                    <span *ngIf = "chart.dd_chart_id == null && chart.xaxis_time_scale" style="text-align:right;" class="mgnleft10 pointer"><i class="far fa-clock clrwarning" title ="Time based drill down available" (click)="removeChart(chart.mc_id)"></i></span>
+                    <span *ngIf = "chart.dd_chart_id != null" style="text-align:right;" class="mgnleft10 pointer"><i class="fas fa-chart-line clrteal" title ="Drilldown Chart Available" (click)="removeChart(chart.mc_id)"></i></span>
+                    <span *ngIf = "!isFromMyChart" style="text-align:right;" class="mgnleft10 pointer"><i class="fas fa-tachometer-alt clrinfo" title ="Add to MyChart" (click)="enableAddMychart(i)"></i></span>
+                    <span *ngIf = "isFromMyChart" style="text-align:right;" class="mgnleft10 pointer"><i class="far fa-times-circle clrdanger" title ="Click to remove me" (click)="removeChart(chart.mc_id)"></i></span>
+                    <span *ngIf = "chart.is_alert_enabled" style="text-align:right;" class="mgnleft10 pointer"><i class="fas fa-bell clrorange" title="Set Alert"></i></span>
+                    <span *ngIf = "chart.chart_desc!=null" style="text-align:right;" class="mgnleft10 pointer"><i class="fas fa-info-circle clrgreen" title="{{chart.chart_desc}}"></i></span>
+                </div>
+            </div>
+            <div [hidden]="!myChart[i]"class="row">
+                <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 apd-frmfld" style="margin-left:10px; margin-top:5px;">
+                    <input type="text" class="font_12 " type="text" placeholder="Enter New myChart Name" [(ngModel)]="myChartName" (blur)="onEditMyChartName()" />
+                </div>
+                <span class="mgntop10 font_10">OR</span>
+                <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 apd-apmslct" style="margin:0px">
+                    <div ngbDropdown class="d-inline-block" >
+                        <button class="btn btn-outline-info"  id="myChartDropDown" ngbDropdownToggle>{{myChartSelVal}}</button>
+                        <ul ngbDropdownMenu aria-labelledby="myChartDropDown" style="max-height:200px; overflow:auto;">
+                            <i *ngFor = "let ele of myChartColl"  class="dropdown-item font_12" (click)="myChartChanged(ele.mc_name)">{{ele.mc_name}}</i>
+                        </ul>
+                    </div>
+                </div>
+                <div class = "col-lg-2 col-md-2 col-sm-2 col-xs-4 mgntop5">
+                    <span><i class="fa fa-check-circle font_17 clrgreen pointer ad-mgrgt5" title="add to myChart" (click)="addToMyChart(i, chart.chart_id, chart.ref_id, chart.module_type, chart.is_system)"></i></span>
+                    <span><i class="fa fa-times-circle font_17 clrred pointer" title="cancel" (click)="cancelEditMyChart(i)"></i></span>
+                </div>
+            </div>
+            <div id="{{chart.mc_id}}" appD3chartsv3 [chartdata]="chart" [width] = "d3width[i]-20" [height]="d3height[i]-30" [chartType]="chart.root_chart_type" (onChartOutput) = "fromD3chart($event)"></div>
+        </div> 
+    </div>
+</div>

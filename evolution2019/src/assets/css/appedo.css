@@ -1,0 +1,756 @@
+html, body {
+    height: 100%;
+    overflow: visible;
+}
+.pointer {
+    cursor: pointer;
+}
+
+
+/*body*/
+
+
+
+@font-face {
+    font-family: 'RobotoRegular';
+    src: url('../fonts/RobotoRegular.eot');
+    src: url('../fonts/RobotoRegular.eot') format('embedded-opentype'), url('../fonts/RobotoRegular.woff2') format('woff2'), url('../fonts/RobotoRegular.woff') format('woff'), url('../fonts/RobotoRegular.ttf') format('truetype'), url('../fonts/RobotoRegular.svg#RobotoRegular') format('svg');
+}
+/*roboto medium*/
+
+@font-face {
+    font-family: 'RobotoMedium';
+    src: url('../fonts/RobotoMedium.eot');
+    src: url('../fonts/RobotoMedium.eot') format('embedded-opentype'), url('../fonts/RobotoMedium.woff2') format('woff2'), url('../fonts/RobotoMedium.woff') format('woff'), url('../fonts/RobotoMedium.ttf') format('truetype'), url('../fonts/RobotoMedium.svg#RobotoMedium') format('svg');
+}
+/*roboto light*/
+
+@font-face {
+    font-family: 'RobotoLight';
+    src: url('../fonts/RobotoLight.eot');
+    src: url('../fonts/RobotoLight.eot') format('embedded-opentype'), url('../fonts/RobotoLight.woff2') format('woff2'), url('../fonts/RobotoLight.woff') format('woff'), url('../fonts/RobotoLight.ttf') format('truetype'), url('../fonts/RobotoLight.svg#RobotoLight') format('svg');
+}
+/*RobotoBold*/
+
+@font-face {
+    font-family: 'RobotoBold';
+    src: url('../fonts/RobotoBold.eot');
+    src: url('../fonts/RobotoBold.eot') format('embedded-opentype'), url('../fonts/RobotoBold.woff2') format('woff2'), url('../fonts/RobotoBold.woff') format('woff'), url('../fonts/RobotoBold.ttf') format('truetype'), url('../fonts/RobotoBold.svg#RobotoBold') format('svg');
+}
+/*font familys here*/
+
+.apd-rbtrgfnfmly {
+    font-family: RobotoRegular;
+}
+
+.apd-rbtrglfnfmly {
+    font-family: RobotoLight;
+}
+
+.apd-rbtrbfnfmly {
+    font-family: RobotoBold;
+}
+
+.apd-rbtmdmfnfmly {
+    font-family: RobotoMedium;
+}
+/* color code here*/
+.bg-1b639e {
+    background-color: #1b639e;
+}
+
+.bg-7e7e7e {
+    background-color: #7e7e7e;
+}
+.bg-green{
+	background-color: var(--green);
+}
+.bg-teal{
+	background-color: var(--teal);
+}
+.bg-yellow{
+	background-color: var(--yellow);
+}
+.bg-info{
+	background-color: var(--info);
+}
+.bg-warning{
+	background-color: var(--warning);
+}
+.bg-danger{
+	background-color: var(--danger);
+}
+.bg-success{
+	background-color: var(--success);
+}
+.bg-white{
+	background-color: var(--white);
+}
+.bg-black{
+	background-color: var(--dark);
+}
+.bg-maroon{
+	background-color: #800000;
+}
+.bg-grey{
+	background-color: var(--grey);
+}
+.bg-darkgrey{
+	background-color: var(--gray-dark);
+}
+.bg-red{
+	background-color: var(--red);
+}
+.bg-orange{
+    background-color: var(--orange);
+}
+.bg-wheat{
+    background-color: wheat;
+}
+.bg-indigo{
+    background-color:var(--indigo);
+}
+.bg-darkgoldenrod{
+    background-color:darkgoldenrod;
+}
+
+.bg-darkgreen{
+    background-color:darkgreen;
+}
+.bg-darkolivegreen{
+    background-color:darkolivegreen;
+}
+.bg-brown{
+    background-color:brown;
+}
+.bg-chocolate{
+    background-color:chocolate;
+}
+.bg-cadetblue{
+    background-color:cadetblue;
+}
+.clrcadetblue{
+	color: cadetblue;
+}
+.clrchocolate{
+	color: chocolate;
+}
+.clrbrown{
+	color: brown;
+}
+.clrdarkolivegreen{
+    color:darkolivegreen;
+}
+.clrdarkgreen{
+    color:darkgreen;
+}
+
+.clrdarkgoldenrod{
+    color:darkgoldenrod;
+}
+.clr1b639e {
+    color: #1b639e;
+}
+
+.clr7e7e7e {
+    color: #7e7e7e;
+}
+.clrgreen{
+	color: var(--green);
+}
+.clrteal{
+	color: var(--teal);
+}
+.clryellow{
+	color: var(--yellow);
+}
+.clrinfo{
+	color: var(--info);
+}
+.clrwarning{
+	color: var(--warning);
+}
+.clrdanger{
+	color: var(--danger);
+}
+.clrsuccess{
+	color: var(--success);
+}
+.clrprimary{
+	color: var(--primary);
+}
+.clrsecondary{
+	color: var(--secondary);
+}
+.clrwhite{
+	color: var(--white);
+}
+.clrblack{
+	color: var(--dark);
+}
+
+.clrmaroon{
+	color: #800000;
+}
+.clrgrey{
+	color: var(--grey);
+}
+.clrdarkgrey{
+	color: var(--gray-dark);
+}
+
+.clrred{
+	color: var(--red);
+}
+.clrorange{
+    color: var(--orange);
+}
+.clrwheat{
+    color: wheat;
+}
+.clrindigo{
+    color:var(--indigo);
+}
+/*font sizes here*/
+.font_8 {
+    font-size: 8px;
+}
+.font_10 {
+    font-size: 10px;
+}
+
+.font_11 {
+    font-size: 11px;
+}
+
+.font_12 {
+    font-size: 12px;
+}
+
+.font_14 {
+    font-size: 14px;
+}
+
+.font_16 {
+    font-size: 16px;
+}
+
+.font_17 {
+    font-size: 17px;
+}
+
+.font_18 {
+    font-size: 18px;
+}
+.font_19 {
+    font-size: 19px;
+}
+
+.font_20 {
+    font-size: 20px;
+}
+
+.font_24 {
+    font-size: 24px;
+}
+.font_25 {
+    font-size: 25px;
+}
+
+.font_28 {
+    font-size: 28px;
+}
+.font_32 {
+    font-size: 32px;
+}
+
+.font_36 {
+    font-size: 36px;
+}
+.font_41 {
+    font-size: 41px;
+}
+
+.font_50 {
+    font-size: 50px;
+}
+.fontwtlig {
+	font-weight: lighter;
+}
+.apdpad0{
+    padding: 0;
+}
+.apdpad2{
+    padding:2px;
+}
+.padleft20{
+    padding-left:20px;
+}
+.padleft30{
+    padding-left:30px;
+}
+
+.padtop20{
+    padding-top:20px;
+}
+.apdpadrgt10{
+    padding:10px;
+}
+.mgn2{
+    margin: 2px;
+}
+.mgntop2 {
+	margin-top:2px;
+}
+
+.mgntop5 {
+	margin-top:5px;
+}
+.mgntop7 {
+	margin-top:7px;
+}
+.mgntop10 {
+	margin-top:10px;
+}
+.mgntop15 {
+	margin-top:15px;
+}
+.mgntop20 {
+	margin-top:20px;
+}
+.mgntop-20 {
+	margin-top:-20px;
+}
+.mgntop40 {
+	margin-top:40px;
+}
+.mgnleft0 {
+	margin-left: 0px;
+}
+
+.mgnleft5 {
+	margin-left: 5px;
+}
+.mgnleft10 {
+	margin-left: 10px;
+}
+.mgnleft15 {
+	margin-left: 15px;
+}
+.mgnleft20 {
+	margin-left: 20px;
+}
+.mgnleft40 {
+	margin-left: 40px;
+}
+.mgnright5 {
+	margin-right: 5px;
+}
+.mgnright10 {
+	margin-right: 10px;
+}
+.mgnright25 {
+	margin-right: 25px;
+}
+
+.capitalize{
+	text-transform: capitalize;
+}
+.uppercase {
+	text-transform: uppercase ;
+}
+
+.lowercase {
+	text-transform: lowercase ;
+}
+.apd-login-icon {
+	margin-left: -40px;
+    text-align: left;
+}
+
+.apd-frmtitl {
+    width: 50%;
+    display: inline-block;
+}
+.apd-frmtitl label {
+    display: block;
+    font-weight: bold;
+}
+
+.apd-frmhdr{
+	width: 50%;
+	text-align: left;
+}
+.apd-frmlognfld {
+    width: 100%;
+    margin: 10px 0 0 0;
+    display: inline-block;
+}
+
+.apd-frmlognfld label {
+    display: block;
+    font-weight: normal;
+    font-size: 18px;
+}
+
+.apd-frmlognfld input {
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #999;
+    background: none;
+    font-size: 14px;
+    color: wheat; 
+}
+
+.apd-frmlognfld input:focus {
+    outline: none;
+}
+
+.apd-frmfld {
+    width: 100%;
+    margin: 0 0 0 0;
+    display: inline-block;
+}
+
+.apd-frmfld label {
+    display: block;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.apd-frmfld input {
+    display: block;
+    width: 100%;
+    padding: 2px 0;
+    border: none;
+    border-bottom: 1px solid #999;
+    background: none;
+    line-height: 16px;
+    font-size: 14px;
+    color: wheat;
+}
+
+.apd-frmfld input:focus {
+    outline: none;
+}
+
+.apd-sbmtbtn-wrper {
+    display: block;
+    margin: 42px 0px 0 0;
+    padding: 5px 5px 5px 5px;
+}
+.apd-center {
+    text-align: center;
+}
+.apd-left {
+    text-align: left;
+}
+.apd-right {
+    text-align: right;
+}
+.apdo-loginbtn {
+	font:inherit;
+}
+
+.logo {
+    /* padding-top: 2px; */
+    padding-left: 10px;
+}
+.apd-logo{
+	width: 50px;
+    padding: 1px;
+    margin-top: -15px;
+}
+.apd-logo-text{
+    margin-top: 2px;
+    font-size: 30px;
+    letter-spacing: 1px;
+    margin-bottom: 0px;
+}
+.apd-form-control-dark{
+    background: none;
+    color: wheat;
+    border-bottom: 1px solid;
+    padding-left: 0px;
+    width:100%;
+}
+.apd-form-control-white{
+    background: none;
+    color: inherit;
+    border-bottom: 1px solid;
+    padding-left: 0px;
+}
+
+.blinkbtmtotop {
+    position: absolute;
+    -webkit-animation: blinker 10s infinite;
+    animation: blinker 10s infinite;
+}
+@-webkit-keyframes blinker {
+    from {top: 30px; opacity: 1;}
+    to {top: 0px; opacity: 0.3;}
+}
+
+@keyframes blinker {
+    from {top: 30px; opacity: 1;}
+    to {top: 0px; opacity: 0.3;}
+}
+
+.blinktoptobtm {
+    position: absolute;
+    -webkit-animation: blinker1 10s infinite;
+    animation: blinker1 10s infinite;
+}
+@-webkit-keyframes blinker1 {
+    from {top: 0px; opacity: 1;}
+    to {top: 30px; opacity: 0.3;}
+}
+
+@keyframes blinker1 {
+    from {top: 0px; opacity: 1;}
+    to {top: 30px; opacity: 0.3;}
+}
+/* drop down classes */
+.btn-outline-info{
+    margin-left: 5px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    padding: 1px;
+}
+/* for black theme d3 charts*/
+text {
+    fill: #fff;
+}
+path.domain  {
+    stroke: #fff;
+}
+/* above changes are for black theme*/
+/* calendar range color works for both dark and light theme*/
+.owl-dt-container-range {
+    color: #000;
+}
+.owl-dt-control-button-content{
+    color: #000;
+}
+.elementToFadeInAndOut {
+    -webkit-animation: fadeinout 5s ease-out forwards;
+    animation: fadeinout 5s ease-out forwards;
+    opacity: 1;
+}
+
+@-webkit-keyframes fadeinout {
+  0% { opacity: 1; }
+  100% {opacity:0.7;}
+}
+
+@keyframes fadeinout {
+    0% { opacity: 1; }
+    100% {opacity:0.7;}
+  }
+
+*[role="separator"]{
+    display: block;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-style: inset;
+    border-width: 1px;
+    color: inherit;
+}
+/* to remove the caret from the login header from default dropdown */
+#menudropdown.dropdown-toggle::after {
+    content: none;
+}
+/* used in alert as id tag     bottom: auto;  */ /* Sit on top of the page content */
+#overlay {
+    position: fixed; 
+    width: auto; 
+    height: auto;
+    top: 15%;
+    right: 10px;
+    border: none;
+    z-index: 2; 
+    cursor: pointer;
+}
+
+.chart-parrent {
+    float: left;
+}
+.chart {
+/*    border: 4px double; */
+/*    opacity: 1; */
+    margin: 2px;
+    float: left;
+    position: absolute;
+    background-color: var(--light);
+/*    display: inline-block;*/
+}
+.chart-edit-mode {
+    position: absolute;
+/*        background-color: black;*/
+/*    border: 4px double; */
+    background-color: var(--light);
+    opacity: 1;
+    resize: both;
+    cursor: move;
+}
+
+.chart-corner-topright-resize {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    cursor: sw-resize;
+}
+.chart-corner-topleft-resize {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    cursor: nwse-resize;
+}
+
+#chart-top-left-resize { top: 0px; left: 0px; }
+#chart-top-right-resize { top: 0px; right: 0px; }
+#chart-bottom-left-resize { bottom: 0px; left: 0px; }
+#chart-bottom-right-resize { bottom: 0px; right: 0px; }
+/* font awesome classes */
+.fa-rotate-90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+
+/* modal class */
+.apdmodal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.apdmodal-content {
+    background-color: #303030;
+    opacity: 0.9;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.apdclose {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.apdsave {
+    margin-top: 15px; 
+    margin-right: 10px; 
+    margin-left:10px;
+}
+.apdsave .icon {
+    color: greenyellow;
+}
+.apdsave .icon:hover,
+.apdsave .icon:focus{
+    color: rgb(89, 231, 7);
+    cursor:pointer;
+    box-shadow: 0px 0px 15px white;
+}
+
+.apdclose:hover,
+.apdclose:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+@media screen and (max-width: 576px) {
+    #gt576 {
+        display: none;
+    }
+}
+@media screen and (max-width: 768px) {
+	.apd-frmtitl{
+		width: 60%;
+    }
+    #gt768 {
+        display: none;
+    }
+}
+@media screen and (max-width: 992px) {
+	.apd-frmtitl{
+		width: 50%;
+    }
+    #gt992 {
+        display: none;
+    }
+}
+@media screen and (max-width: 1024px) {
+	.apd-frmtitl{
+		width: 40%;
+    }
+    .chart {
+        position: sticky;
+    }
+    #gt1024 {
+        display: none;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1366px;
+    }
+}
+
+/* d3 chart classes for tooltip */
+.overlay {
+    fill: none;
+    stroke: none;
+    pointer-events: all;
+}
+
+.focusLine {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 0.5px;
+}
+
+.focusCircle {
+    fill: red;
+}
+.focusText {
+  line-height: 1.2;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 12px;
+  background: hsla(200,50%,85%,0.9); 
+  color: #000;
+  
+}
+.apd-chart-tooltip {
+	position: fixed;
+	width: auto;
+	height: auto;
+	padding: 5px;
+	background-color:hsla(200,100%,90%,0.9);
+	border: 1px solid hsla(200,50%,50%,0.9);
+	border-radius: 2px;
+	pointer-events: none;
+	line-height: 1.5;
+	font-weight: bold;
+	font-size: 12px;
+	overflow : hidden;
+}

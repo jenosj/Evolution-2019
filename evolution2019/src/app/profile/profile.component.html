@@ -1,0 +1,55 @@
+<app-login-header></app-login-header>
+<!-- col-lg-offset-4 col-md-offset-3 col-sm-offset-2 col-xs-offset-1-->
+<div class="row col-lg-4 col-sm-6 col-md-8 col-xs-10  mgntop40" style="margin-left:auto; margin-right:auto;">
+	<label class="apd-login-icon">
+		<span class="fa-stack fa-1x apd-left mgntop-20">
+			<i class="fa fa-circle fa-stack-2x  clrgreen"></i>
+			<i class="fa fa-key fa-stack-1x fa-inverse"></i>
+		</span>
+		<span class="font_24 clr1b639e fontwtlig mgnleft5">Profile</span>
+	</label>
+<!--apd-frmlognfld apd-form-control-dark form-control -->
+    <form [formGroup]="form" (submit)="profileUpdate()">
+        <div class="form-group apd-frmlognfld  apd-left" >
+            <label >Email address :
+            <span class="clrwheat font_14"><br>{{email_id}}</span></label>
+		    </div>
+        <div class="form-group apd-frmlognfld apd-left ">
+            <label for="name">First Name</label>
+            <div [ngClass] ="{'text-danger': (form.controls.first_name.errors && form.controls.first_name.dirty),'text-success': !form.controls.first_name.errors}">
+                <input type="text" class="apd-form-control-dark" placeholder="name" formControlName="first_name" name="first_name" id="first_name">
+                <ul class="help-block font_12">
+                    <li *ngIf="form.controls.first_name.errors?.required && form.controls.first_name.dirty">This field is required.</li>
+                    <li *ngIf="(form.controls.first_name.errors?.minlength || form.controls.first_name.errors?.maxlength) && form.controls.last_name.dirty">Minimum length 2 & maximum length 30 characters .</li>
+                    <li *ngIf="form.controls.first_name.errors?.validateName && form.controls.last_name.dirty">Name must be characters. No special characters or numbers.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="form-group apd-frmlognfld  apd-left ">
+            <label for="name">Last Name</label>
+            <div [ngClass] ="{'text-danger': (form.controls.last_name.errors && form.controls.last_name.dirty),'text-success': !form.controls.last_name.errors}">
+                <input type="text" class="apd-form-control-dark" placeholder="name" formControlName="last_name" name="last_name" id="last_name">
+                <ul class="help-block font_12">
+                    <li *ngIf="form.controls.last_name.errors?.required && form.controls.last_name.dirty">This field is required.</li>
+                    <li *ngIf="(form.controls.last_name.errors?.minlength || form.controls.last_name.errors?.maxlength) && form.controls.last_name.dirty">Minimum length 1 & maximum length 30 characters .</li>
+                    <li *ngIf="form.controls.last_name.errors?.validateName && form.controls.last_name.dirty">Name must be characters. No special characters or numbers.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="form-group apd-frmlognfld  apd-left ">
+            <label for="mobile">Mobile</label>
+            <div [ngClass] ="{'text-danger': (form.controls.mobile_no.errors && form.controls.mobile_no.dirty),'text-success': !form.controls.mobile_no.errors}">
+                <input type="text" class="apd-form-control-dark" placeholder="mobile" formControlName="mobile_no" name="mobile_no" id="mobile">
+                <ul class="help-block font_12">
+                    <li *ngIf="(form.controls.mobile_no.errors?.minlength || form.controls.mobile_no.errors?.maxlength) && form.controls.mobile_no.dirty">Minimum length 10 & maximum length 15 digits .</li>
+                    <li *ngIf="form.controls.mobile_no.errors?.validateMobile && form.controls.mobile_no.dirty">Starts with + country code and mobile number, only numeric allowed</li>
+                </ul>
+            </div>
+        </div>
+        <div class="form-group">
+            <button [disabled]="form.controls.dirty" class="btn btn-primary">Update</button>
+			<i *ngIf="loading" class="fa fa-refresh fa-spin" style="font-size:24px"></i>
+            <a [routerLink]="['/dashboard']" class="btn btn-link">Cancel</a>
+        </div>
+    </form>
+</div>

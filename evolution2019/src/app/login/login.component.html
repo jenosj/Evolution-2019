@@ -1,0 +1,35 @@
+<app-login-header></app-login-header>
+<div class="col-lg-4 col-md-6 col-sm-8 col-xs-10 mgntop40" style="margin-left:auto; margin-right:auto;">
+	<!-- to set the title of the browser -->
+	<label>{{setTitle(appTitle)}}</label>
+		<label class="apd-login-icon">
+			<span class="fa-stack fa-1x apd-left mgntop-20">
+				<i class="fa fa-circle fa-stack-2x  clrgreen"></i>
+				<i class="fa fa-key fa-stack-1x fa-inverse"></i>
+			</span>
+			<span class="font_28 clr1b639e fontwtlig mgnleft5">Login</span>
+		</label>
+	<form [formGroup]="form" (submit)="login()">
+			<div class="form-group apd-frmlognfld apd-left" >
+				<label for="exampleInputEmail1" >Email address</label>
+				<input type="text" name="email" id="email" class="form-control" formControlName="email"/>
+			</div>
+
+			<div class="form-group apd-frmlognfld apd-left">
+				<label for="exampleInputPassword1">Password</label>
+				<input type="password" name="password" id="password" class="form-control" formControlName="password"/>
+			</div>
+			<div class="form-group apd-sbmtbtn-wrper font_16 apd-center">
+					<button [disabled]="isLoading" class="apdo-loginbtn btn btn-success" style="font-size:24px; padding:2px 80px;">Login</button>
+					<i *ngIf="isLoading" class="fa fa-refresh fa-spin" style="font-size:24px"></i>
+			</div>
+	</form>
+	<div class="apd-left mgntop-10px">
+		<span class="clr1b639e">
+			<a href="#/forgotPassword">Forgot your password?</a>
+		</span>
+		<span class="font_16 clr7e7e7e" style="margin-left:100px;">
+		</span>
+		<a [routerLink]="['/register']" class="btn btn-link">Register</a>
+	</div>
+</div>

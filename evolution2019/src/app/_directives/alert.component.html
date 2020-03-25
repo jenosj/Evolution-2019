@@ -1,0 +1,4 @@
+﻿
+<div id="overlay" *ngIf="!staticAlertClosed && message" (click)="close()" style="z-index:2000" class = "col-xl-12 col-lg-12 elementToFadeInAndOut" [ngClass]="{ 'alert': message, 'alert-success': message.type === 'success', 'alert-danger': message.type === 'error','alert-info': message.type === 'info' }">
+        <i class="fa fa-bell" ></i>   {{message.text}} 
+</div>

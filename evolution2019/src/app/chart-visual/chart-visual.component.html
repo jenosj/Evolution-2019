@@ -1,0 +1,273 @@
+<app-login-header></app-login-header>
+<!-- Chart Visual Header -->
+<div class="row" >
+  <div class="col-lg-4">
+    <span><i class="fas fa-angle-double-left clrwheat pointer mgntop10" style="float:left;" (click)="onBackFromCard()" title="Back"></i></span>
+    <span class="fa-stack fa-1x font_14 mgnleft20">
+        <i class="fa fa-circle fa-stack-2x  clrwhite"></i>
+        <i class="fas fa-chart-pie clrcadetblue fa-stack-1x"></i>
+    </span>
+    <span class="mgnleft10 mgntop5 font_20"> {{pageTitle}} </span>
+  </div>
+</div>
+<!-- Loading spinner -->
+<div *ngIf="isLoading" class="apdmodal" style="text-align: center; display:block; ">
+  <span class="fa-stack fa-2x" style="z-index:10;"> 
+      <i class="fa fa-circle fa-stack-2x" style="color:white; opacity:0.8;"></i> 
+      <i class="fas fa-spinner fa-spin fa-stack-1x" style="color:black;"></i>
+  </span>
+</div>
+<!-- form content -->
+<form class="form font_12 mgntop15" [formGroup]="form">
+  <div class="row col-lg-12">
+    <div class="col-lg-2">
+      <div class="col-lg-12 mgnleft10">
+        <div class="row">
+          <div class="custom-control custom-radio">
+              <input type="radio" id="radio1" name="qryType" class="custom-control-input"  (click)="qryTypeSel('stdqry')" checked>
+              <label class="custom-control-label mgntop2" for="radio1">Std Query</label>
+          </div>
+          <!-- <div class="custom-control custom-radio mgnleft10">
+              <input type="radio" id="radio2" name="qryType" class="custom-control-input" (click)="qryTypeSel('aggrqry')" >
+              <label class="custom-control-label mgntop2" for="radio2">Aggr Query</label>
+          </div> -->
+        </div>
+      </div>
+      <div *ngIf = "qryType == 'stdqry'" class="col-lg-12">
+        <div class="form-group apd-frmfld apd-left ">
+          <label class="font_14 mgntop10" for="ChartTitle">DB Connector Name</label>
+          <div ngbDropdown class="d-inline-block" style="margin-left:-5px;">
+              <label class="btn btn-outline-info"  id="dropdown" ngbDropdownToggle>{{dbQryConnectorName}}</label>
+              <ul ngbDropdownMenu aria-labelledby="dropdown" style="max-height:200px; overflow:auto;">
+                  <i *ngFor = "let dbConn of dbConnColl"  class="dropdown-item font_12" (click)="onDbStdConChange(dbConn)">{{dbConn.connector_name}}</i>
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div *ngIf = "qryType == 'aggrqry'" class="col-lg-12">
+        <div class="form-group apd-frmfld apd-left ">
+          <label class="font_14 mgntop10" for="ChartTitle">DB Connector Name</label>
+          <div ngbDropdown class="d-inline-block" style="margin-left:-5px;">
+              <label class="btn btn-outline-info"  id="dropdown" ngbDropdownToggle>{{dbAggrConnectorName}}</label>
+              <ul ngbDropdownMenu aria-labelledby="dropdown" style="max-height:200px; overflow:auto;">
+                  <i *ngFor = "let dbConn of dbConnColl"  class="dropdown-item font_12" (click)="onDbAggrConChange(dbConn.connector_name,dbConn.engine_name)">{{dbConn.connector_name}}</i>
+              </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf = "qryType == 'stdqry'" class="col-lg-10">
+      <div class="form-group apd-frmfld apd-left " >
+        <div class="row">
+          <label class="mgnleft15 " for="StdQry">Standard Query</label>
+          <label class="mgnleft10 " style="font-size:14px" [ngClass] ="isStdQryValidated ? 'text-success' : 'text-danger'" >{{isStdQryValidated ?"Successfully Validated" : "Validation Failed OR to be validated"}}</label>
+          <label *ngIf = "inQryTextArea" class="mgnleft10 text-info" >Enter/TAB to revalidate Query</label>
+        </div>
+        <div [ngClass] ="{'text-danger': (form.controls.StdQry.errors)}">
+            <textarea id="idStdQry" #idStdQry style="width:100%; height: 120px; resize:vertical; background-color:inherit; color:wheat; font-size:14px;" name="StdQry" form="form" formControlName="StdQry" placeholder="Query must start with Select" required (keyup.enter)="onBlurStdQry()" (keydown.tab)="onBlurStdQry()" (focus) = "fnInQryTextArea()"></textarea>
+        </div>
+      </div>
+    </div>
+    <!-- <div *ngIf = "qryType == 'aggrqry'" class="col-lg-10">
+      <div class="form-group apd-frmfld apd-left " >
+          <div class="row">
+              <label class="font_14 mgnleft15 " for="AggrQry">Aggregated Query</label>
+              <label class="mgnleft10 " [ngClass] ="isAggrQryValidated ? 'text-success' : 'text-danger'" >{{isAggrQryValidated ? "Successfully Validated" : "Validation Failed OR to be validated"}}</label>
+              <label *ngIf = "inQryTextArea" class="mgnleft10 text-info" >Tab to revalidate Query</label>
+          </div>
+          <div [ngClass] ="{'text-danger': (form.controls.AggrQry.errors && form.controls.AggrQry.dirty),'text-success': !form.controls.AggrQry.errors}">
+            <textarea style="width:100%; height: 120px; resize:vertical; background-color:inherit; color:wheat; font-size:14px;" name="AggrQry" form="form" formControlName="AggrQry" placeholder="Valid Query - Only Select query allowed" (blur)="onBlurStdQry()" (focus) = "fnInQryTextArea()"></textarea>
+        </div>
+      </div>
+    </div> -->
+  </div>
+  <!--Parameter definition-->
+  <div *ngIf="enableParam" class = "row">
+    <div *ngFor = "let ele of paramArr; let i = index " class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 apd-frmfld" style="margin-left:10px; margin-top:5px;">
+      <input type="text" class="font_12 " type="text" placeholder="Enter Parameter Value" [(ngModel)]="ddParam[i]" [ngModelOptions]="{standalone: true}"  />
+    </div>
+    <div class="badge badge-pill badge-success apdsave pointer" style="float:right;" (click)="onBlurStdQry()">Accept</div>
+  </div>
+  <!-- After Qry Validation -->
+  <div class="row col-lg-12" >
+    <div *ngIf="isStdQryValidated" class="col-lg-6 padleft30" >
+      <div class="row col-lg-12">
+        <label class="font_16 col-lg-3 apdpad0">Base Chart Type</label>
+        <div ngbDropdown class="d-inline-block" style="margin-left:-5px;">
+            <label class="btn btn-outline-info"  id="dropdown" ngbDropdownToggle>{{selRootChart}}</label>
+            <ul  ngbDropdownMenu aria-labelledby="dropdown" style="max-height:200px; overflow:auto;">
+                <i *ngFor = "let root of rootChartColl"  class="dropdown-item font_12" (click)="onRootChange(root)">{{root}}</i>
+            </ul>
+        </div>
+        <div><i class="fas fa-question-circle mgntop5 mgnleft20 font_20" style="color:rgb(232, 252, 54);" title="For pie, hbar, donut - column based charts are disabled. Choose others for column based charts"></i></div>
+      </div>
+      <div class="row" style="border-bottom:1px solid rgb(232, 252, 54);">
+        <div class="col-lg-5">
+            <label class="font_16" for="ColumnName">Column Name</label>
+        </div>
+        <div class="col-lg-4">
+            <label class="font_16" for="ChartType">Chart Type</label>
+        </div>
+        <div class="col-lg-3">
+            <label class="font_16" for="ChartUnit">Chart Unit</label>
+        </div>
+      </div>
+      <div class="row" *ngFor = "let col of arrCol; let i = index" >
+        <div class="col-lg-5">
+            <label class="font_12" for="ColumnName">{{col}}</label>
+        </div>
+        <div class="col-lg-4">
+            <label *ngIf = "i==0" class="font_12" for="ChartType">axisLabel</label>
+            <div *ngIf = "i!=0" ngbDropdown class="d-inline-block" style="margin-left:-5px;">
+                <label class="btn btn-outline-info font_12"  id="dropdown1" ngbDropdownToggle>{{selType[i]==null?"select chart type": selType[i]}}</label>
+                <ul  ngbDropdownMenu aria-labelledby="dropdown1" style="max-height:200px; overflow:auto;">
+                    <i *ngFor = "let type of chartType" [ngStyle] ="{'display': disp}" class="dropdown-item font_12" (click)="onChangeChartType(type,i)">{{type}}</i>
+                </ul>
+            </div>
+          </div>
+        <div class="col-lg-3">
+          <div ngbDropdown class="d-inline-block" style="margin-left:-5px;">
+              <label class="btn btn-outline-info font_12"  id="dropdown" ngbDropdownToggle>{{selUnit[i]==null?"select unit":selUnit[i]}}</label>
+              <ul ngbDropdownMenu aria-labelledby="dropdown" style="max-height:200px; overflow:auto;">
+                  <i *ngFor = "let unit of unitColl"  class="dropdown-item font_12" (click)="onChangeChartUnit(unit,i)">{{unit}}</i>
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div class ="row padtop20" style="border-top:1px solid rgb(232, 252, 54);">
+        <div class ="col-lg-4">
+          <label class="col-lg-12" style="margin-left:-8px;">Column Critical</label>
+          <div class="col-lg-12" ngbDropdown class="d-inline-block">
+              <label class="btn btn-outline-info font_12"  id="dropdown2" ngbDropdownToggle>{{selColCritical==null?"--Select--": selColCritical}}</label>
+              <ul ngbDropdownMenu aria-labelledby="dropdown2" style="max-height:200px; overflow:auto;">
+                  <i *ngFor = "let col of arrCol; let i = index">
+                    <i *ngIf="i != 0 " class="dropdown-item font_12" (click)="onColWarning(col)">{{col}}</i>
+                  </i> 
+                </ul>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <label class="col-lg-12" style="margin-left:-8px;">Column Warning</label>
+          <div class="col-lg-12 " ngbDropdown class="d-inline-block">
+              <label class="btn btn-outline-info font_12"  id="dropdown3" ngbDropdownToggle>{{selColWarning==null?"--Select--": selColWarning}}</label>
+              <ul ngbDropdownMenu aria-labelledby="dropdown3" style="max-height:200px; overflow:auto;">
+                  <i *ngFor = "let col of arrCol; let i = index">
+                    <i *ngIf="i != 0 " class="dropdown-item font_12" (click)="onColWarning(col)">{{col}}</i>
+                  </i> 
+              </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 apd-frmfld">
+            <label class="col-lg-12"style="margin-left:-8px; font-size:10px;">Drilldown ChartId</label>
+            <div [ngClass] ="{'text-danger': (form.controls.DDChartId.errors && form.controls.DDChartId.dirty),'text-success': !form.controls.DDChartId.errors}">
+            <input type="text" class="apd-form-control-dark capitalize" placeholder="Enter DD Chart Id" formControlName="DDChartId" name="DDChartId" id="DDChartId">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="isStdQryValidated" class="col-lg-6">
+      <div class="col-lg-12">
+        <div class="form-group apd-frmfld apd-left ">
+          <label class="font_12" for="ChartTitle">Chart Title</label>
+          <div [ngClass] ="{'text-danger': (form.controls.ChartTitle.errors && form.controls.ChartTitle.dirty),'text-success': !form.controls.ChartTitle.errors}">
+              <input type="text" class="apd-form-control-dark capitalize" placeholder="Chart Title not more than 30 characters" formControlName="ChartTitle" name="ChartTitle" id="ChartTitle" required>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="form-group apd-frmfld apd-left " >
+          <label class="font_12" for="ChartDesc">Chart Desc</label>
+          <div [ngClass] ="{'text-danger': (form.controls.ChartDesc.errors && form.controls.ChartDesc.dirty),'text-success': !form.controls.ChartDesc.errors}">
+              <textarea style="width:100%; resize:none; background-color:inherit; color:wheat" name="ChartDesc" form="form" formControlName="ChartDesc" placeholder="Description not more than 100 charactors"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="form-group apd-frmfld apd-left ">
+          <label class="font_12" for="Category">Category</label>
+          <div [ngClass] ="{'text-danger': (form.controls.Category.errors && form.controls.Category.dirty),'text-success': !form.controls.Category.errors}">
+              <input type="text" class="apd-form-control-dark capitalize" placeholder="Category not more than 20 characters" formControlName="Category" name="Category" id="Category" required>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- Trigger/Open The Modal -->
+<div class="row col-lg-12">
+  <!-- <button *ngIf="isStdQryValidated" class="btn btn-success mgntop10 mgnleft20"  (click) = "drawChart()" >Draw Chart</button> -->
+  <span *ngIf="isStdQryValidated" class="btn btn-info mgnleft20 mgntop10" (click) = "drawChart()"><i class="far fa-chart-bar  font_18"></i></span>
+  <span class="btn btn-success mgnleft20 mgntop10" *ngIf = "form.valid && isChartAccepted"  (click) ="checkDDChartId()" ><i class="far fa-save  font_18"></i></span>
+</div>
+<!-- Validator Message Area -->
+<div class ="row">
+  <ul class="help-block font_12">
+    <div [ngClass] ="{'text-danger': (form.controls.StdQry.errors && form.controls.StdQry.dirty),'text-success': !form.controls.StdQry.errors}">
+      <li class="font_12" *ngIf="form.controls.StdQry.errors?.required && form.controls.StdQry.dirty">Standard Query field is required.</li>
+      <li *ngIf="form.controls.StdQry.errors?.validateStdQry  && form.controls.StdQry.dirty">Standard Query must start with Select. Remove Semi Colon if used. Multiple Statement not allowed. Column Names must be unique. Avoid using end of line characters </li>
+    </div>
+    <!-- <div [ngClass] ="{'text-danger': (form.controls.AggrQry.errors && form.controls.AggrQry.dirty),'text-success': !form.controls.AggrQry.errors}">
+      <li *ngIf="form.controls.AggrQry.errors?.validateAggrQry && form.controls.AggrQry.dirty">Aggregated Query must start with Select. Remove Semi Colon if used. Multiple Statement not allowed. Column Names must be unique. Avoid using end of line characters </li>
+    </div> -->
+    <div [ngClass] ="{'text-danger': (form.controls.ChartTitle.errors && form.controls.ChartTitle.dirty),'text-success': !form.controls.ChartTitle.errors}">
+        <li class="font_12" *ngIf="form.controls.ChartTitle.errors?.required && form.controls.ChartTitle.dirty">Chart Title field is required.</li>
+        <li class="font_12" *ngIf="form.controls.ChartTitle.errors?.minlength || form.controls.ChartTitle.errors?.maxlength">Chart Title Minimum length 3 & maximum length 30 characters.</li>
+        <li class="font_12" *ngIf="form.controls.ChartTitle.errors?.validateName && form.controls.ChartTitle.dirty">Chart Title: Allow Alpha, Numeric, Underscore (_), Space and Hyphen (-)</li>    
+    </div>
+    <div [ngClass] ="{'text-danger': (form.controls.ChartDesc.errors && form.controls.ChartDesc.dirty),'text-success': !form.controls.ChartDesc.errors}">
+      <li class="font_12" *ngIf="form.controls.ChartDesc.errors?.required && form.controls.ChartDesc.dirty">Chart Desc field is required.</li>
+      <li class="font_12" *ngIf=" form.controls.ChartDesc.errors?.maxlength">Chart Desc must not exceed 100 characters.</li>
+    </div>
+    <div [ngClass] ="{'text-danger': (form.controls.Category.errors && form.controls.Category.dirty),'text-success': !form.controls.Category.errors}">
+      <li class="font_12" *ngIf="form.controls.Category.errors?.required && form.controls.Category.dirty">Category field is required.</li>
+      <li class="font_12" *ngIf=" form.controls.Category.errors?.maxlength && form.controls.Category.dirty">Category must not exceed 10 characters.</li>
+      <li class="font_12" *ngIf="form.controls.Category.errors?.validateCategory && form.controls.Category.dirty">Category: Allow Alpha Numeric (space,_,- are not allowed)</li>
+    </div>
+    <div [ngClass] ="{'text-danger': (form.controls.DDChartId.errors && form.controls.DDChartId.dirty),'text-success': !form.controls.DDChartId.errors}">
+        <li class="font_12" *ngIf="form.controls.DDChartId.errors?.validateDDChartId && form.controls.DDChartId.dirty">Drill Down Chart ID: Numeric only allowed</li>
+    </div>
+</ul>
+
+</div>
+<!-- Chart/Table Modal for vieweing chart -->
+<div *ngIf="canDrawChart" id="myModal" [ngStyle]="{'display':modalDisplay}" class="apdmodal">
+  <!-- Modal content -->
+  <div  class="apdmodal-content">
+    <div class="">
+      <span class="apdclose" (click)="openModal('close')">&times;</span>
+      <span class="badge badge-pill badge-success apdsave pointer" style="float:right;" (click)="acceptCV()">Accept</span>
+      <span *ngIf = "chartId != undefined" style="text-align:right;" style="float:right;"  class="mgntop10 pointer"><i class="fas fa-tachometer-alt clrinfo" title ="Add to MyChart" (click)="enableAddMychart()"></i></span>
+    </div>
+    <div [hidden]="!myChart"class="row">
+      <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 apd-frmfld" style="margin-left:10px; margin-top:5px;">
+          <input type="text" class="font_12 " type="text" placeholder="Enter New myChart Name" [(ngModel)]="myChartName" (blur)="onEditMyChartName()" />
+      </div>
+      <span class="mgntop10 font_10">OR</span>
+      <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 apd-apmslct" style="margin:0px">
+          <div ngbDropdown class="d-inline-block" >
+              <button class="btn btn-outline-info"  id="myChartDropDown" ngbDropdownToggle>{{myChartSelVal}}</button>
+              <ul ngbDropdownMenu aria-labelledby="myChartDropDown" style="max-height:200px; overflow:auto;">
+                  <i *ngFor = "let ele of myChartColl"  class="dropdown-item font_12" (click)="myChartChanged(ele.mc_name)">{{ele.mc_name}}</i>
+              </ul>
+          </div>
+      </div>
+      <div class = "col-lg-2 col-md-2 col-sm-2 col-xs-4 mgntop5">
+          <span><i class="fa fa-check-circle font_17 clrgreen pointer ad-mgrgt5" title="add to myChart" (click)="addToMyChart()"></i></span>
+          <span><i class="fa fa-times-circle font_17 clrred pointer" title="cancel" (click)="cancelEditMyChart(i)"></i></span>
+      </div>
+    </div>
+    <!-- drawing charts when table not selected in root chart type-->
+    <div *ngIf="!isTable" id="0" appD3chartsv3 [chartdata]="d3ChartData" [width] = "chartWidth-50" [height]="chartHt-20" [chartType]="d3RootChartType"></div>
+    <!-- Table selected in root chart type -->
+    <div *ngIf="isTable" style="height:400px; overflow-y:scroll;">
+      <table class="table table-hover">
+        <tr class="table-warning">
+          <th class="capitalize" scope="row" *ngFor= "let rowheader of objectKeys(customQryRes[0])">{{rowheader}}</th>
+        </tr>
+        <tr *ngFor ="let row of customQryRes; let i = index">
+          <td class="capitalize" *ngFor = "let values of objectValues(customQryRes[i])">{{values}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

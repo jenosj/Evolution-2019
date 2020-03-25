@@ -1,0 +1,29 @@
+<html>
+<script>
+// Following are the steps for dynamically loading the dashboard/chart in embed URL.
+// If you using node, then you have to install jsonwebtoken via 'npm install jsonwebtoken' or in your package.json
+// If you are using other than node, then use jsonwebtoken to encrypt the data and form the url.
+var jwt = require("jsonwebtoken");
+
+var APP_SITE_URL = "@APP_URL@";
+var APP_EMBED_SECURITY_KEY = "@EMBED_SECRET_KEY@";
+var ENCRYPT_USER_ID = "@ENC_USER_ID@"
+var payload = {
+  dashboard: "<MY_CHART_NAME>", // OR
+  chart_id: "<CHART_ID>"
+  params: {
+	param1: 23, //Your params for the chart or dashboard
+	param2: 43, //Your params for the chart or dashboard
+  }
+};
+var token = jwt.sign(payload, APP_EMBED_SECURITY_KEY);
+
+var iframeUrl = APP_SITE_URL + "embedDashboard/" + token + "?encUserId="+ENCRYPT_USER_ID;
+
+document.getElementById("app_chart").src = iframeUrl;
+
+</script>
+<body>
+<iframe name="app_chart" id="app_chart" ></iframe>
+</body>
+</html>
