@@ -56,5 +56,3 @@ async function decrypt(val) {
     decrypt += decipher.final('utf8');
     return decrypt;
 }
-
-hi how
