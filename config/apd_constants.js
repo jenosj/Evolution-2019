@@ -24,7 +24,7 @@ pgDbConfig:{
 smtpConfig:{
     host: 'smtp.gmail.com',
     port: 465,
-    secure: true,
+    secure: false,
     auth: {
        user: 'qam_automail@softsmith.com',
        pass: 'smith*135'
